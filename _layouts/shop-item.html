@@ -1,35 +1,47 @@
 ---
 layout: default
 ---
-
-<article class="post-article">
+<article class="product-article">
   <!-- Hero Section -->
-  <header class="post-hero">
-    <div class="post-hero-image image-loading">
-      <img class="lazy-img" loading="lazy" src="{{ page.image | relative_url }}" alt="{{ page.title }}">
+  <header class="product-hero">
+    <div class="product-hero-image image-loading">
+      <img class="lazy-img" loading="lazy" src="{{ page.image }}" alt="{{ page.title }}">
     </div>
-    <div class="post-header-content">
-      <div class="post-meta">
-        <time datetime="{{ page.date | date_to_xmlschema }}" class="post-date">
-          {{ page.date | date: "%b %d, %Y" }}
-        </time>
-        <span class="post-read-time">
-          <i class="far fa-clock"></i> {{ page.read_time }}
-        </span>
+    <div class="product-header-content">
+      <div class="product-meta">
+        <span class="product-category">{{ page.category }}</span>
+        <div class="product-price">
+          {% if page.original_price %}
+            <span class="original-price">${{ page.original_price }}</span>
+          {% endif %}
+          <span class="current-price">{{ page.price }}</span>
+        </div>
       </div>
-      <h1 class="post-title">{{ page.title }}</h1>
-      {% if page.categories %}
-        <div class="post-categories">
-          {% for category in page.categories %}
-            <span class="post-category">{{ category }}</span>
-          {% endfor %}
+      <h1 class="product-title">{{ page.title }}</h1>
+      <p class="product-description">{{ page.description }}</p>
+      
+      {% if page.features %}
+        <div class="product-features">
+          <h3>What's Included:</h3>
+          <ul>
+            {% for feature in page.features %}
+              <li>{{ feature }}</li>
+            {% endfor %}
+          </ul>
         </div>
       {% endif %}
+      
+      <div class="product-actions">
+        <a href="{{ page.stripe_link }}" class="btn-primary">Purchase Now</a>
+        {% if page.demo_link %}
+          <a href="{{ page.demo_link }}" class="btn-secondary">View Demo</a>
+        {% endif %}
+      </div>
     </div>
   </header>
-
-  <!-- Main Content -->
-  <div class="post-content glass-card">
+  
+  <!-- Additional Content -->
+  <div class="product-content glass-card">
     <div class="prose">
       {{ content }}
     </div>
