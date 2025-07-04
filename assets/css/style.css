@@ -4,9 +4,6 @@
   --radius: 16px;
   --border: 1px;
   --ease: cubic-bezier(0.4, 0, 0.2, 1);
-  --desktop-max-width: 1200px;
-  --desktop-side-padding: 2rem;
-  --desktop-content-width: 80ch;
 
   /* Light Theme Colors */
   --bg: #f8fafc;
