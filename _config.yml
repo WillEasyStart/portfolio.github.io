@@ -40,7 +40,7 @@ defaults:
       path: ''
       type: 'shop_items'
     values:
-      layout: 'shop_item'
+      layout: 'shop-item'
       image: '/assets/images/default-shop-image.jpg'
 
 # Exclude from processing
