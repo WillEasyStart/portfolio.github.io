@@ -1,0 +1,285 @@
+---
+layout: default
+---
+
+<div class="shop-item-page">
+  <!-- Breadcrumb Navigation -->
+  <nav class="breadcrumb mb-6">
+    <a href="{{ '/' | relative_url }}" class="breadcrumb-link">Home</a>
+    <span class="breadcrumb-separator">/</span>
+    <a href="{{ '/' | relative_url }}#shop" class="breadcrumb-link">Shop</a>
+    <span class="breadcrumb-separator">/</span>
+    <span class="breadcrumb-current">{{ page.title }}</span>
+  </nav>
+
+  <!-- Product Details -->
+  <div class="shop-item-container glass-card rounded-2xl p-6 shadow-xl">
+    <div class="shop-item-grid">
+      <!-- Product Image -->
+      <div class="shop-item-image">
+        <img src="{{ page.image | relative_url }}" alt="{{ page.title }}" 
+             class="w-full h-auto rounded-xl shadow-lg">
+      </div>
+
+      <!-- Product Info -->
+      <div class="shop-item-info">
+        <div class="shop-item-category">
+          <span class="category-tag">{{ page.category }}</span>
+        </div>
+        
+        <h1 class="shop-item-title gradient-text">{{ page.title }}</h1>
+        
+        <div class="shop-item-price">
+          <span class="price-current">{{ page.price }}</span>
+          {% if page.original_price %}
+            <span class="price-original">{{ page.original_price }}</span>
+          {% endif %}
+        </div>
+
+        <div class="shop-item-description">
+          {{ content }}
+        </div>
+
+        <!-- Purchase Actions -->
+        <div class="shop-item-actions">
+          <a href="{{ page.stripe_link }}" target="_blank" rel="noopener noreferrer" 
+             class="shop-buy-btn primary-btn">
+            <i data-lucide="shopping-bag" class="w-5 h-5"></i>
+            Buy Now
+          </a>
+          
+          {% if page.demo_link %}
+            <a href="{{ page.demo_link }}" target="_blank" rel="noopener noreferrer" 
+               class="shop-demo-btn secondary-btn">
+              <i data-lucide="eye" class="w-5 h-5"></i>
+              Preview
+            </a>
+          {% endif %}
+        </div>
+
+        <!-- Additional Info -->
+        {% if page.features %}
+        <div class="shop-item-features">
+          <h3>Features:</h3>
+          <ul>
+            {% for feature in page.features %}
+              <li>{{ feature }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+        {% endif %}
+
+        {% if page.tags %}
+        <div class="shop-item-tags">
+          {% for tag in page.tags %}
+            <span class="tag">{{ tag }}</span>
+          {% endfor %}
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+  <!-- Back to Shop -->
+  <div class="mt-6">
+    <a href="{{ '/' | relative_url }}#shop" class="back-btn glass-card rounded-xl p-3 inline-flex items-center space-x-2">
+      <i data-lucide="arrow-left" class="w-4 h-4"></i>
+      <span>Back to Shop</span>
+    </a>
+  </div>
+</div>
+
+<style>
+.shop-item-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+.breadcrumb-link {
+  color: inherit;
+  text-decoration: none;
+  transition: opacity 0.3s;
+}
+
+.breadcrumb-link:hover {
+  opacity: 0.7;
+}
+
+.breadcrumb-separator {
+  opacity: 0.5;
+}
+
+.breadcrumb-current {
+  opacity: 0.6;
+}
+
+.shop-item-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+@media (max-width: 768px) {
+  .shop-item-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}
+
+.shop-item-image img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.shop-item-info {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.category-tag {
+  background: linear-gradient(45deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: 1rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+  display: inline-block;
+  width: fit-content;
+}
+
+.shop-item-title {
+  font-size: 2rem;
+  font-weight: bold;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.shop-item-price {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 0.5rem 0;
+}
+
+.price-current {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #22c55e;
+}
+
+.price-original {
+  font-size: 1.1rem;
+  text-decoration: line-through;
+  opacity: 0.6;
+}
+
+.shop-item-description {
+  font-size: 1rem;
+  line-height: 1.6;
+  opacity: 0.8;
+}
+
+.shop-item-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.primary-btn, .secondary-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.75rem;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s;
+  border: none;
+  cursor: pointer;
+}
+
+.primary-btn {
+  background: linear-gradient(45deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+.primary-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+}
+
+.secondary-btn {
+  background: rgba(255, 255, 255, 0.1);
+  color: inherit;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.secondary-btn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-1px);
+}
+
+.shop-item-features {
+  margin-top: 1.5rem;
+}
+
+.shop-item-features h3 {
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.shop-item-features ul {
+  list-style: none;
+  padding: 0;
+}
+
+.shop-item-features li {
+  padding: 0.25rem 0;
+  opacity: 0.8;
+}
+
+.shop-item-features li::before {
+  content: "✓";
+  color: #22c55e;
+  margin-right: 0.5rem;
+  font-weight: bold;
+}
+
+.shop-item-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.tag {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 0.25rem 0.75rem;
+  border-radius: 1rem;
+  font-size: 0.8rem;
+  opacity: 0.8;
+}
+
+.back-btn {
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.3s;
+}
+
+.back-btn:hover {
+  transform: translateY(-1px);
+  opacity: 0.8;
+}
+</style>
