@@ -1,20 +1,20 @@
 ---
 layout: default
 ---
-<article class="product-article">
+<article class="product-article glass-card">
   <!-- Hero Section -->
   <header class="product-hero">
-    <div class="product-hero-image image-loading">
+    <div class="product-hero-image image-loading glass-card">
       <img class="lazy-img" loading="lazy" src="{{ page.image }}" alt="{{ page.title }}">
     </div>
-    <div class="product-header-content">
+    <div class="product-header-content glass-card">
       <div class="product-meta">
         <span class="product-category">{{ page.category }}</span>
         <div class="product-price">
           {% if page.original_price %}
             <span class="original-price">${{ page.original_price }}</span>
           {% endif %}
-          <span class="current-price">{{ page.price }}</span>
+          <span class="current-price gradient-text">{{ page.price }}</span>
         </div>
       </div>
       <h1 class="product-title">{{ page.title }}</h1>
@@ -25,16 +25,23 @@ layout: default
           <h3>What's Included:</h3>
           <ul>
             {% for feature in page.features %}
-              <li>{{ feature }}</li>
+              <li class="feature-item">
+                <span class="feature-icon fa-gradient">✓</span>
+                {{ feature }}
+              </li>
             {% endfor %}
           </ul>
         </div>
       {% endif %}
       
       <div class="product-actions">
-        <a href="{{ page.stripe_link }}" class="btn-primary">Purchase Now</a>
+        <a href="{{ page.stripe_link }}" class="btn-primary action-btn">
+          <i class="fas fa-shopping-cart"></i> Purchase Now
+        </a>
         {% if page.demo_link %}
-          <a href="{{ page.demo_link }}" class="btn-secondary">View Demo</a>
+          <a href="{{ page.demo_link }}" class="btn-secondary action-btn">
+            <i class="fas fa-eye"></i> View Demo
+          </a>
         {% endif %}
       </div>
     </div>
