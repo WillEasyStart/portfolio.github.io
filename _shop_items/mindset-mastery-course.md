@@ -1,4 +1,5 @@
 ---
+layout: shop-item
 id: "product1"
 title: "Mindset Mastery Course"
 description: "Transform your thinking with our comprehensive mindset training program."
