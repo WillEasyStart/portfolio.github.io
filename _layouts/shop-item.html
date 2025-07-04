@@ -2,89 +2,36 @@
 layout: default
 ---
 
-<div class="shop-item-page">
-  <!-- Breadcrumb Navigation -->
-  <nav class="breadcrumb mb-6">
-    <a href="{{ '/' | relative_url }}" class="breadcrumb-link">Home</a>
-    <span class="breadcrumb-separator">/</span>
-    <a href="{{ '/' | relative_url }}#shop" class="breadcrumb-link">Shop</a>
-    <span class="breadcrumb-separator">/</span>
-    <span class="breadcrumb-current">{{ page.title }}</span>
-  </nav>
-
-  <!-- Product Details -->
-  <div class="shop-item-container glass-card rounded-2xl p-6 shadow-xl">
-    <div class="shop-item-grid">
-      <!-- Product Image -->
-      <div class="shop-item-image">
-        <img src="{{ page.image | relative_url }}" alt="{{ page.title }}" 
-             class="w-full h-auto rounded-xl shadow-lg">
+<article class="post-article">
+  <!-- Hero Section -->
+  <header class="post-hero">
+    <div class="post-hero-image image-loading">
+      <img class="lazy-img" loading="lazy" src="{{ page.image | relative_url }}" alt="{{ page.title }}">
+    </div>
+    <div class="post-header-content">
+      <div class="post-meta">
+        <time datetime="{{ page.date | date_to_xmlschema }}" class="post-date">
+          {{ page.date | date: "%b %d, %Y" }}
+        </time>
+        <span class="post-read-time">
+          <i class="far fa-clock"></i> {{ page.read_time }}
+        </span>
       </div>
-
-      <!-- Product Info -->
-      <div class="shop-item-info">
-        <div class="shop-item-category">
-          <span class="category-tag">{{ page.category }}</span>
-        </div>
-        
-        <h1 class="shop-item-title gradient-text">{{ page.title }}</h1>
-        
-        <div class="shop-item-price">
-          <span class="price-current">{{ page.price }}</span>
-          {% if page.original_price %}
-            <span class="price-original">{{ page.original_price }}</span>
-          {% endif %}
-        </div>
-
-        <div class="shop-item-description">
-          {{ content }}
-        </div>
-
-        <!-- Purchase Actions -->
-        <div class="shop-item-actions">
-          <a href="{{ page.stripe_link }}" target="_blank" rel="noopener noreferrer" 
-             class="shop-buy-btn primary-btn">
-            <i data-lucide="shopping-bag" class="w-5 h-5"></i>
-            Buy Now
-          </a>
-          
-          {% if page.demo_link %}
-            <a href="{{ page.demo_link }}" target="_blank" rel="noopener noreferrer" 
-               class="shop-demo-btn secondary-btn">
-              <i data-lucide="eye" class="w-5 h-5"></i>
-              Preview
-            </a>
-          {% endif %}
-        </div>
-
-        <!-- Additional Info -->
-        {% if page.features %}
-        <div class="shop-item-features">
-          <h3>Features:</h3>
-          <ul>
-            {% for feature in page.features %}
-              <li>{{ feature }}</li>
-            {% endfor %}
-          </ul>
-        </div>
-        {% endif %}
-
-        {% if page.tags %}
-        <div class="shop-item-tags">
-          {% for tag in page.tags %}
-            <span class="tag">{{ tag }}</span>
+      <h1 class="post-title">{{ page.title }}</h1>
+      {% if page.categories %}
+        <div class="post-categories">
+          {% for category in page.categories %}
+            <span class="post-category">{{ category }}</span>
           {% endfor %}
         </div>
-        {% endif %}
-      </div>
+      {% endif %}
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <div class="post-content glass-card">
+    <div class="prose">
+      {{ content }}
     </div>
   </div>
-
-  <!-- Back to Shop -->
-  <div class="mt-6">
-    <a href="{{ '/' | relative_url }}#shop" class="back-btn glass-card rounded-xl p-3 inline-flex items-center space-x-2">
-      <i data-lucide="arrow-left" class="w-4 h-4"></i>
-      <span>Back to Shop</span>
-    </a>
-  </div>
-</div>
+</article>
