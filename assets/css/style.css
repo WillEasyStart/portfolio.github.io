@@ -1,5 +1,3 @@
-/* ============ IMPORT STICKY HEADER STYLES ============ */
-{% include sticky-header-styles.css %}
 /* ============ BASE VARIABLES ============ */
 :root {
   /* Spacing & Layout */
