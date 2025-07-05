@@ -1,12 +1,4 @@
-/* MODULARIZATION: base/_variables.scss */
-/* ========================================================================== *
- * # BASE STYLES
- * ========================================================================== */
-
-/*
- * Base variables for spacing, borders, transitions, and colors.
- * These variables are used throughout the stylesheet to maintain consistency.
- */
+/* ============ BASE VARIABLES ============ */
 :root {
   /* Spacing & Layout */
   --radius: 16px;
@@ -26,18 +18,9 @@
   /* Typography */
   --font-inter: 'Inter', system-ui, -apple-system, sans-serif;
   --text-shadow: none;
-
-  /* Desktop Specific Variables */
-  --desktop-max-width: 1200px;
-  --desktop-side-padding: 3rem;
-  --desktop-content-width: 800px;
 }
 
-/* MODULARIZATION: themes/_dark-mode.scss */
-/*
- * Dark mode theme variables.
- * These variables override the light theme variables when the 'dark-mode' class is applied to the body.
- */
+/* ============ DARK THEME ============ */
 .dark-mode {
   --bg: radial-gradient(circle at 20% 30%, hsl(210, 34%, 12%) 0%, hsl(210, 38%, 7%) 100%);
   --fg: rgba(255, 255, 255, 0.92);
@@ -50,11 +33,14 @@
   background-attachment: fixed;
 }
 
-/* MODULARIZATION: base/_global.scss */
-/*
- * Global body styles.
- * Includes font settings, background, color, and smooth transitions for theme changes.
- */
+/* ============ BASE STYLES ============ */
+@supports (font-variation-settings: normal) {
+  body {
+    font-family: var(--font-inter);
+    font-variation-settings: 'wght' 400, 'slnt' 0;
+  }
+}
+
 body {
   font-family: var(--font-inter);
   background-color: var(--bg);
@@ -66,332 +52,19 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* MODULARIZATION: base/_typography.scss */
-/* Font variation settings for modern browsers */
-@supports (font-variation-settings: normal) {
-  body {
-    font-variation-settings: 'wght' 400, 'slnt' 0;
-  }
+/* ============ PWA LOADER ============ */
+.pwa-loader {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--bg);
+  z-index: 9999;
+  transition: opacity 0.3s;
 }
 
-/*
- * Global typography styles.
- * Defines font sizes, weights, and line heights for common HTML headings and paragraphs.
- */
-h1 {
-  font-size: clamp(1.75rem, 5vw, 2.25rem);
-  font-variation-settings: 'wght' 700;
-  line-height: 1.2;
-}
-
-h2,
-h3 {
-  font-variation-settings: 'wght' 600;
-}
-
-p {
-  font-variation-settings: 'wght' 400;
-  line-height: 1.6;
-}
-
-/* Dark mode specific text shadow for better readability */
-.dark-mode p,
-.dark-mode .blog-excerpt,
-.dark-mode .post-date,
-.dark-mode .read-time {
-  text-shadow: var(--text-shadow);
-}
-
-/* MODULARIZATION: base/_global.scss */
-/*
- * Global focus states for interactive elements.
- * Ensures consistent visual feedback for keyboard navigation.
- */
-button:focus,
-a:focus,
-input:focus,
-textarea:focus {
-  outline: 2px solid #28F29C;
-  outline-offset: 2px;
-}
-
-/* MODULARIZATION: components/_form-elements.scss */
-/*
- * Input and textarea base styles.
- * Defines default appearance and transitions for form fields.
- */
-input,
-textarea {
-  background: rgba(255, 255, 255, 0.8);
-  color: #1a1a1a;
-  border: var(--border) solid var(--border-color);
-  transition: all 0.3s ease;
-}
-
-/* Dark mode adjustments for input and textarea */
-.dark-mode input,
-.dark-mode textarea {
-  background: rgba(30, 30, 30, 0.8);
-  color: #E0E0E0;
-  border-color: #444;
-}
-
-/* Focus states for form inputs */
-input:focus,
-textarea:focus {
-  outline: none;
-  border-color: #28F29C;
-  box-shadow: 0 0 0 2px rgba(0, 255, 237, 0.2);
-}
-
-.dark-mode input:focus,
-.dark-mode textarea:focus {
-  box-shadow: 0 0 0 2px rgba(0, 255, 237, 0.4);
-}
-
-/* MODULARIZATION: utilities/_prose.scss */
-/*
- * Prose styles for rich text content (e.g., blog posts, product descriptions).
- * This section defines the styling for content generated from Markdown or a rich text editor.
- */
-.prose {
-  color: var(--fg);
-  line-height: 1.7;
-}
-
-.prose a {
-  color: #0CB8E0;
-  text-decoration: none;
-  transition: all 0.3s var(--ease);
-}
-
-.prose a:hover {
-  color: #28F29C;
-  text-decoration: underline;
-}
-
-.dark-mode .prose {
-  color: rgba(255, 255, 255, 0.9);
-}
-
-.dark-mode .prose a {
-  color: #28F29C;
-}
-
-.dark-mode .prose a:hover {
-  color: #0CB8E0;
-}
-
-/* Headings within prose content */
-.prose h1, .prose h2, .prose h3, .prose h4, .prose h5, .prose h6 {
-  margin-top: 2rem;
-  margin-bottom: 1rem;
-  font-variation-settings: 'wght' 600;
-  color: var(--fg);
-}
-
-.prose h1 {
-  font-size: 2.25rem;
-  font-variation-settings: 'wght' 700;
-}
-
-.prose h2 {
-  font-size: 1.875rem;
-  border-bottom: 2px solid var(--border-color);
-  padding-bottom: 0.5rem;
-}
-
-.prose h3 {
-  font-size: 1.5rem;
-}
-
-.prose h4 {
-  font-size: 1.25rem;
-}
-
-/* Paragraphs within prose content */
-.prose p {
-  margin-bottom: 1.5rem;
-  font-variation-settings: 'wght' 400;
-}
-
-.prose p:last-child {
-  margin-bottom: 0;
-}
-
-/* Lists within prose content */
-.prose ul, .prose ol {
-  margin-bottom: 1.5rem;
-  padding-left: 1.5rem;
-}
-
-.prose ul li,
-.prose ol li {
-  margin-bottom: 0.5rem;
-  line-height: 1.6;
-}
-
-.prose ul {
-  list-style: none;
-}
-
-.prose ul li {
-  position: relative;
-  padding-left: 1.5rem;
-}
-
-.prose ul li::before {
-  content: '▸';
-  position: absolute;
-  left: 0;
-  color: #0CB8E0;
-  font-weight: bold;
-}
-
-/* Blockquotes within prose content */
-.prose blockquote {
-  margin: 2rem 0;
-  padding: 1.5rem;
-  border-left: 4px solid var(--gradient);
-  background: var(--card-bg);
-  border-radius: var(--radius);
-  font-style: italic;
-  position: relative;
-}
-
-.prose blockquote::before {
-  content: '"';
-  position: absolute;
-  top: -0.5rem;
-  left: 1rem;
-  font-size: 3rem;
-  color: #0CB8E0;
-  opacity: 0.3;
-}
-
-.prose blockquote p {
-  margin: 0;
-  font-size: 1.1rem;
-}
-
-/* Code blocks within prose content */
-.prose pre {
-  background: var(--card-bg);
-  border: var(--border) solid var(--border-color);
-  border-radius: var(--radius);
-  padding: 1.5rem;
-  overflow-x: auto;
-  margin: 1.5rem 0;
-  font-family: 'Fira Code', 'Monaco', 'Cascadia Code', monospace;
-  font-size: 0.875rem;
-  line-height: 1.5;
-}
-
-/* Inline code within prose content */
-.prose code {
-  background: rgba(0, 0, 0, 0.05);
-  padding: 0.2rem 0.4rem;
-  border-radius: 0.25rem;
-  font-family: 'Fira Code', 'Monaco', 'Cascadia Code', monospace;
-  font-size: 0.875em;
-  color: #e11d48;
-}
-
-.dark-mode .prose code {
-  background: rgba(255, 255, 255, 0.1);
-  color: #fbbf24;
-}
-
-/* Images within prose content */
-.prose img {
-  max-width: 100%;
-  height: auto;
-  border-radius: var(--radius);
-  margin: 1.5rem 0;
-  box-shadow: var(--shadow);
-}
-
-/* Tables within prose content */
-.prose table {
-  width: 100%;
-  border-collapse: collapse;
-  margin: 1.5rem 0;
-  background: var(--card-bg);
-  border-radius: var(--radius);
-  overflow: hidden;
-  box-shadow: var(--shadow);
-}
-
-.prose table th,
-.prose table td {
-  padding: 1rem;
-  text-align: left;
-  border-bottom: 1px solid var(--border-color);
-}
-
-.prose table th {
-  background: var(--gradient);
-  color: white;
-  font-weight: 600;
-  text-transform: uppercase;
-  font-size: 0.875rem;
-  letter-spacing: 0.5px;
-}
-
-.prose table tr:hover {
-  background: rgba(0, 0, 0, 0.02);
-}
-
-.dark-mode .prose table tr:hover {
-  background: rgba(255, 255, 255, 0.02);
-}
-
-/* Horizontal rules within prose content */
-.prose hr {
-  border: none;
-  height: 2px;
-  background: var(--gradient);
-  margin: 3rem 0;
-  border-radius: 1px;
-}
-
-/* Dark mode adjustments for prose content */
-.dark-mode .prose {
-  color: rgba(255, 255, 255, 0.9);
-}
-
-.dark-mode .prose h1,
-.dark-mode .prose h2,
-.dark-mode .prose h3,
-.dark-mode .prose h4,
-.dark-mode .prose h5,
-.dark-mode .prose h6 {
-  color: rgba(255, 255, 255, 0.95);
-  text-shadow: var(--text-shadow);
-}
-
-.dark-mode .prose blockquote {
-  background: rgba(255, 255, 255, 0.05);
-  color: rgba(255, 255, 255, 0.9);
-}
-
-.dark-mode .prose pre {
-  background: rgba(0, 0, 0, 0.3);
-  color: rgba(255, 255, 255, 0.9);
-}
-
-/* ========================================================================== *
- * # COMPONENTS
- * ========================================================================== */
-
-/* MODULARIZATION: components/_card.scss */
-/*
- * Glass Card Component
- * A reusable card component with a glassmorphism effect.
- * Usage: Apply the 'glass-card' class to a container element.
- * HTML Structure: <div class="glass-card">...</div>
- * Variants: Hover effects for light and dark modes.
- */
+/* ============ GLASS CARD STYLES ============ */
 .glass-card {
   background: var(--card-bg);
   backdrop-filter: blur(16px) saturate(180%);
@@ -413,13 +86,7 @@ textarea:focus {
   box-shadow: 0 12px 40px rgba(12, 184, 224, 0.2);
 }
 
-/* MODULARIZATION: components/_profile-img.scss */
-/*
- * Profile Image Component
- * Styles for a profile image with a floating animation and hover effect.
- * Usage: Apply 'profile-img' to an image or container.
- * HTML Structure: <img class="profile-img" src="..." alt="Profile">
- */
+/* ============ PROFILE STYLES ============ */
 .profile-img {
   background: var(--gradient);
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
@@ -429,10 +96,12 @@ textarea:focus {
 }
 
 @keyframes float {
+
   0%,
   100% {
     transform: translateY(0) rotate(0deg);
   }
+
   50% {
     transform: translateY(-12px) rotate(2deg);
   }
@@ -443,13 +112,31 @@ textarea:focus {
   transform: scale(1.05) rotate(5deg);
 }
 
-/* MODULARIZATION: components/_social-icon.scss */
-/*
- * Social Icon & Action Button Component
- * Shared styles for social media icons and general action buttons.
- * Usage: Apply 'social-icon' or 'action-btn' to link or button elements.
- * HTML Structure: <a class="social-icon">...</a> or <button class="action-btn">...</button>
- */
+/* ============ TYPOGRAPHY ============ */
+h1 {
+  font-size: clamp(1.75rem, 5vw, 2.25rem);
+  font-variation-settings: 'wght' 700;
+  line-height: 1.2;
+}
+
+h2,
+h3 {
+  font-variation-settings: 'wght' 600;
+}
+
+p {
+  font-variation-settings: 'wght' 400;
+  line-height: 1.6;
+}
+
+.dark-mode p,
+.dark-mode .blog-excerpt,
+.dark-mode .post-date,
+.dark-mode .read-time {
+  text-shadow: var(--text-shadow);
+}
+
+/* ============ SOCIAL ICONS & BUTTONS ============ */
 .social-icon,
 .action-btn {
   transition: all 0.3s var(--ease);
@@ -470,13 +157,7 @@ textarea:focus {
   box-shadow: 0 8px 20px rgba(12, 184, 224, 0.2);
 }
 
-/* MODULARIZATION: components/_toggle.scss */
-/*
- * Theme Toggle Component
- * Styles for a button that toggles the theme (light/dark).
- * Usage: Apply 'theme-btn' to the button and 'theme-icon' to the icon inside.
- * HTML Structure: <button class="theme-btn"><i class="theme-icon">...</i></button>
- */
+/* ============ THEME TOGGLE ============ */
 .theme-btn:hover .theme-icon {
   transform: rotate(15deg) scale(1.1);
 }
@@ -485,12 +166,7 @@ textarea:focus {
   transition: transform 0.3s var(--ease);
 }
 
-/*
- * Portfolio Toggle Component
- * A toggle switch for portfolio sections.
- * Usage: Apply 'portfolio-toggle' to the main container and 'portfolio-toggle-slider' to the inner slider.
- * HTML Structure: <div class="portfolio-toggle"><div class="portfolio-toggle-slider"></div></div>
- */
+/* ============ PORTFOLIO TOGGLE ============ */
 .portfolio-toggle {
   display: flex;
   align-items: center;
@@ -516,14 +192,114 @@ textarea:focus {
   z-index: 1;
 }
 
-/* MODULARIZATION: components/_category-filter.scss */
-/*
- * Category Filter Component
- * Styles for filter buttons used to categorize content.
- * Usage: Apply 'category-filter-container' to the wrapper, 'category-filters' to the scrollable list, and 'category-filter' to individual buttons.
- * HTML Structure: <div class="category-filter-container"><div class="category-filters"><button class="category-filter">...</button></div></div>
- * Variants: '.active' class for selected filter.
- */
+/* Glass Card Styles */
+.glass-card {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s var(--ease);
+}
+
+.dark-mode .glass-card {
+  background: var(--card-bg);
+  border-color: var(--border-color);
+  box-shadow: 0 8px 32px rgba(12, 184, 224, 0.1);
+}
+
+/* Profile Styles */
+.profile-img {
+  background: linear-gradient(135deg, #28F29C 0%, #0CB8E0 50%);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  border: 0px solid rgba(255, 255, 255, 0.2);
+  transition: transform 0.5s ease;
+}
+
+.profile-img:hover {
+  transform: scale(1.05) rotate(5deg);
+}
+
+/* Social Icons & Buttons */
+.social-icon,
+.action-btn {
+  transition: all 0.3s var(--ease);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.social-icon:hover,
+.action-btn:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+.dark-mode .social-icon:hover,
+.dark-mode .action-btn:hover {
+  box-shadow: 0 8px 20px rgba(12, 184, 224, 0.2);
+}
+
+/* Theme Toggle */
+.theme-btn:hover .theme-icon {
+  transform: rotate(15deg) scale(1.1);
+}
+
+.theme-icon {
+  transition: transform 0.3s ease;
+}
+
+/* Layout Components */
+.controls-container {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  right: 1rem;
+  z-index: 10;
+}
+
+.theme-toggle-container {
+  position: relative;
+}
+
+.portfolio-toggle-container {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  z-index: 10;
+  display: flex;
+  gap: 0.5rem;
+}
+
+/* Portfolio Toggle */
+.portfolio-toggle {
+  display: flex;
+  align-items: center;
+  width: 60px;
+  height: 24px;
+  padding: 0 4px;
+  border-radius: 12px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, #28F29C 0%, #0CB8E0 50%);
+}
+
+.portfolio-toggle-slider {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.9);
+  transition: transform 0.3s var(--ease);
+  z-index: 1;
+}
+
+/* Category Filters */
 .category-filter-container {
   margin-bottom: 0.5rem;
 }
@@ -533,11 +309,11 @@ textarea:focus {
   gap: 0.5rem;
   overflow-x: auto;
   padding-bottom: 0.25rem;
-  scrollbar-width: none; /* Firefox */
+  scrollbar-width: none;
 }
 
 .category-filters::-webkit-scrollbar {
-  display: none; /* Chrome, Safari, Edge */
+  display: none;
 }
 
 .category-filter {
@@ -562,13 +338,16 @@ textarea:focus {
   background: rgba(255, 255, 255, 0.1);
 }
 
-/* MODULARIZATION: components/_shop-card.scss */
-/*
- * Shop Card Component
- * Styles for individual product cards in a shop section.
- * Usage: Apply 'shop-card' to the main card container.
- * HTML Structure: <div class="shop-card"><div class="shop-image"><img></div><div class="shop-overlay">...</div></div>
- */
+/* Portfolio Container */
+.portfolio-section {
+  height: 52vh;
+  min-height: 350px;
+  max-height: 600px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Shop Card Styles */
 .shop-card {
   position: relative;
   overflow: hidden;
@@ -595,7 +374,7 @@ textarea:focus {
   box-shadow: 0 10px 25px rgba(12, 184, 224, 0.2);
 }
 
-.shop-card__image-wrapper {
+.shop-image {
   width: 100%;
   height: 100%;
   position: relative;
@@ -603,7 +382,7 @@ textarea:focus {
   border-radius: var(--radius);
 }
 
-.shop-card__image {
+.shop-card img {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -611,11 +390,11 @@ textarea:focus {
   transition: transform 0.5s var(--ease);
 }
 
-.shop-card:hover .shop-card__image {
+.shop-card:hover img {
   transform: scale(1.08);
 }
 
-.shop-card__overlay {
+.shop-overlay {
   position: absolute;
   bottom: 0;
   left: 0;
@@ -626,17 +405,17 @@ textarea:focus {
   transition: opacity 0.3s var(--ease);
 }
 
-.shop-card:hover .shop-card__overlay {
+.shop-card:hover .shop-overlay {
   opacity: 1;
 }
 
-.shop-card__content {
+.shop-content {
   display: flex;
   flex-direction: column;
   gap: 4px;
 }
 
-.shop-card__title {
+.shop-title {
   font-size: 14px;
   font-weight: 700;
   line-height: 1.2;
@@ -644,20 +423,20 @@ textarea:focus {
   margin-bottom: 0.15rem;
 }
 
-.shop-card__price-current {
+.shop-price-current {
   font-size: 0.85rem;
   font-weight: 600;
   color: rgba(255, 255, 255, 0.9);
 }
 
-.shop-card__price-original {
+.shop-price-original {
   font-size: 0.7rem;
   opacity: 0.7;
   text-decoration: line-through;
   color: rgba(255, 255, 255, 0.9);
 }
 
-.shop-card__description {
+.shop-description {
   font-size: 11px;
   color: rgba(255, 255, 255, 0.8);
   line-height: 1.3;
@@ -668,14 +447,14 @@ textarea:focus {
   margin-bottom: 0.15rem;
 }
 
-.shop-card__actions {
+.shop-actions {
   display: flex;
   align-items: center;
   gap: 0.3rem;
   margin-top: 0.15rem;
 }
 
-.shop-card__buy-btn {
+.shop-buy-btn {
   flex: 1;
   display: flex;
   align-items: center;
@@ -689,12 +468,12 @@ textarea:focus {
   transition: all 0.3s var(--ease);
 }
 
-.shop-card__buy-btn:hover {
+.shop-buy-btn:hover {
   filter: brightness(1.1);
   transform: translateY(-1px);
 }
 
-.shop-card__info-btn {
+.shop-info-btn {
   width: 1.8rem;
   height: 1.8rem;
   display: flex;
@@ -705,29 +484,11 @@ textarea:focus {
   transition: all 0.3s var(--ease);
 }
 
-.shop-card__info-btn:hover {
+.shop-info-btn:hover {
   background: rgba(255, 255, 255, 0.1);
 }
 
-/* Dark mode adjustments for shop card */
-.dark-mode .shop-card__overlay {
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
-}
-
-.dark-mode .shop-card__title,
-.dark-mode .shop-card__price-current,
-.dark-mode .shop-card__price-original,
-.dark-mode .shop-card__description {
-  color: rgba(230, 230, 230, 0.9);
-}
-
-/* MODULARIZATION: components/_blog-card.scss */
-/*
- * Blog Card Component
- * Styles for individual blog post cards.
- * Usage: Apply 'blog-card' to the main card container.
- * HTML Structure: <div class="blog-card"><div class="blog-image"><img></div><div class="blog-content">...</div></div>
- */
+/* Blog Card Styles */
 .blog-card {
   background: rgba(255, 255, 255, 0.7);
   backdrop-filter: blur(20px);
@@ -758,7 +519,7 @@ textarea:focus {
   box-shadow: 0 10px 25px rgba(12, 184, 224, 0.2);
 }
 
-.blog-card__image-wrapper {
+.blog-image {
   width: 100%;
   height: 135px;
   border-radius: 10px;
@@ -769,23 +530,23 @@ textarea:focus {
   flex-shrink: 0;
 }
 
-.dark-mode .blog-card__image-wrapper {
+.dark-mode .blog-image {
   background: rgba(255, 255, 255, 0.15);
   border: 1px solid rgba(255, 255, 255, 0.25);
 }
 
-.blog-card__image {
+.blog-image img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   transition: transform 0.3s var(--ease);
 }
 
-.blog-card:hover .blog-card__image {
+.blog-card:hover .blog-image img {
   transform: scale(1.05);
 }
 
-.blog-card__category {
+.blog-category {
   position: absolute;
   top: 6px;
   left: 6px;
@@ -799,14 +560,14 @@ textarea:focus {
   background: linear-gradient(135deg, #28F29C 0%, #0CB8E0 50%);
 }
 
-.blog-card__content {
+.blog-content {
   display: flex;
   flex-direction: column;
   gap: 8px;
   flex-grow: 1;
 }
 
-.blog-card__title {
+.blog-title {
   font-size: 16px;
   font-weight: 700;
   line-height: 1.3;
@@ -817,7 +578,7 @@ textarea:focus {
   margin: 0;
 }
 
-.blog-card__excerpt {
+.blog-excerpt {
   font-size: 13px;
   color: rgba(0, 0, 0, 0.8);
   line-height: 1.3;
@@ -828,172 +589,237 @@ textarea:focus {
   margin: 0;
 }
 
-.blog-card__meta {
+.blog-meta {
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin-top: auto;
 }
 
-.blog-card__author-info {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
+    .author-info {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
 
-.blog-card__author-details {
-  display: flex;
-  flex-direction: column;
-}
+    .author-details {
+      display: flex;
+      flex-direction: column;
+    }
 
-.blog-card__author-avatar {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 2px solid rgba(255, 255, 255, 0.3);
-  background: linear-gradient(135deg, #00FFED 0%, #00B8BA 50%);
-}
+    .author-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      background: linear-gradient(135deg, #00FFED 0%, #00B8BA 50%);
+    }
 
-.blog-card__author-name {
-  font-size: 13px;
-  font-weight: 600;
-  background: linear-gradient(135deg, #00FFED 0%, #00B8BA 50%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
+    .author-name {
+      font-size: 13px;
+      font-weight: 600;
+      background: linear-gradient(135deg, #00FFED 0%, #00B8BA 50%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
 
-.blog-card__post-date {
-  font-size: 11px;
-  color: rgba(0, 0, 0, 0.8);
-  margin-top: 2px;
-}
+    .post-date {
+      font-size: 11px;
+      color: rgba(0, 0, 0, 0.8);
+      margin-top: 2px;
+    }
 
-.blog-card__read-time {
-  font-size: 11px;
-  color: rgba(0, 0, 0, 0.8);
-  display: flex;
-  align-items: center;
-  gap: 4px;
-}
+    .read-time {
+      font-size: 11px;
+      color: rgba(0, 0, 0, 0.8);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
 
-/* Dark mode adjustments for blog card */
-.dark-mode .blog-card__excerpt,
-.dark-mode .blog-card__post-date,
-.dark-mode .blog-card__read-time {
+.dark-mode .blog-excerpt,
+.dark-mode .post-date,
+.dark-mode .read-time {
   color: rgba(255, 255, 255, 0.9);
 }
 
-/* MODULARIZATION: components/_alert.scss */
-/*
- * Alert Message Component
- * Styles for transient notification messages.
- * Usage: Apply 'alert-message' along with 'alert-success' or 'alert-error'.
- * HTML Structure: <div class="alert-message alert-success">...</div>
- */
-.alert-message {
-  position: fixed;
-  top: 1rem;
-  right: 1rem;
-  padding: 0.75rem 1.5rem;
-  border-radius: var(--radius);
+/* Container Styles */
+.shop-container {
   display: flex;
-  align-items: center;
+  gap: 0.5rem;
+  padding: 0.25rem 0.5rem;
+  height: 100%;
+  overflow-x: auto;
+  overflow-y: visible;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.3) rgba(255, 255, 255, 0.1);
+  flex-wrap: nowrap;
+  align-items: flex-start;
+}
+
+.shop-container::-webkit-scrollbar {
+  height: 4px;
+}
+
+.shop-container::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.shop-container::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 2px;
+}
+
+.blog-container {
+  display: flex;
+  flex-direction: column;
   gap: 0.75rem;
-  z-index: 100;
-  animation: slideIn 0.3s ease forwards;
-  backdrop-filter: blur(10px);
+  width: 100%;
+  padding: 0.5rem;
+  height: calc(100% - 50px);
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.3) rgba(255, 255, 255, 0.1);
 }
 
-.alert-success {
-  background: rgba(40, 167, 69, 0.2);
-  border: 1px solid rgba(40, 167, 69, 0.3);
+.blog-container::-webkit-scrollbar {
+  width: 4px;
 }
 
-.alert-error {
-  background: rgba(220, 53, 69, 0.2);
-  border: 1px solid rgba(220, 53, 69, 0.3);
-}
-
-/* Dark mode adjustments for alert messages */
-.dark-mode .alert-success {
-  background: rgba(40, 167, 69, 0.3);
-}
-
-.dark-mode .alert-error {
-  background: rgba(220, 53, 69, 0.3);
-}
-
-/* MODULARIZATION: components/_button.scss */
-/*
- * Button Components
- * Reusable button styles for primary and secondary actions.
- * Usage: Apply 'btn-primary' or 'btn-secondary' to button or link elements.
- * HTML Structure: <button class="btn-primary">...</button>
- * Variants: '.pulse-on-hover' for a pulse animation on hover.
- */
-.btn-primary,
-.btn-secondary {
-  flex: 1;
-  padding: 1rem;
-  border-radius: var(--radius);
-  font-weight: 600;
-  text-align: center;
-  transition: all 0.3s var(--ease);
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.btn-primary:hover,
-.btn-secondary:hover {
-  transform: translateY(-2px);
-}
-
-.btn-primary {
-  background: var(--gradient);
-  color: white;
-  border: none;
-}
-
-.btn-primary:hover {
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
-}
-
-.btn-primary.pulse-on-hover:hover {
-  animation: pulse 1.5s infinite;
-}
-
-.btn-secondary {
-  background: rgba(255, 255, 255, 0.1);
-  color: var(--fg);
-  border: 1px solid var(--border-color);
-}
-
-.btn-secondary:hover {
-  background: rgba(255, 255, 255, 0.2);
-}
-
-/* Dark mode adjustments for buttons */
-.dark-mode .btn-secondary {
-  background: rgba(255, 255, 255, 0.05);
-  border-color: var(--border-color);
-}
-
-.dark-mode .btn-secondary:hover {
+.blog-container::-webkit-scrollbar-track {
   background: rgba(255, 255, 255, 0.1);
 }
 
-/* MODULARIZATION: components/_modal.scss */
-/*
- * Modal Component
- * Styles for a generic modal dialog.
- * Usage: Apply 'modal-overlay' to the background, 'modal-container' to the dialog, and 'modal-content' to the inner content.
- * HTML Structure: <div class="modal-overlay"><div class="modal-container"><div class="modal-content">...</div></div></div>
- * JavaScript Dependencies: Requires JS to toggle 'active' class for visibility and animation.
- */
+.blog-container::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 2px;
+}
+
+/* App Content */
+.app-content {
+  width: 100%;
+  max-width: 375px;
+  margin: 0 auto;
+  padding-top: 10px;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.3s ease forwards;
+}
+
+/* Gradient Text & Icons */
+.gradient-text {
+  background: linear-gradient(135deg, #28F29C 0%, #0CB8E0 50%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  display: inline-block;
+  background-size: 100%;
+  background-repeat: no-repeat;
+  padding-bottom: 2px;
+}
+
+.dark-mode .gradient-text {
+  text-shadow: 0 0 12px rgba(12, 184, 224, 0.4);
+}
+
+.gradient-icon {
+  background: linear-gradient(135deg, #28F29C 0%, #0CB8E0 50%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  display: inline-block;
+}
+
+.fa-gradient {
+  background: linear-gradient(135deg, #28F29C 0%, #0CB8E0 50%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  display: inline-block;
+}
+
+/* Focus States */
+button:focus,
+a:focus,
+input:focus,
+textarea:focus {
+  outline: 2px solid #28F29C;
+  outline-offset: 2px;
+}
+
+/* Image Loading */
+.image-loading {
+  position: relative;
+  background: rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+}
+
+.image-loading::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(90deg,
+      transparent,
+      rgba(255, 255, 255, 0.1),
+      transparent);
+  animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+  0% {
+    transform: translateX(-100%);
+  }
+
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.lazy-img {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.lazy-img.loaded {
+  opacity: 1;
+}
+
+/* Dark Mode Specific Styles */
+.dark-mode .shop-overlay {
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
+}
+
+.dark-mode .shop-title,
+.dark-mode .shop-price-current,
+.dark-mode .shop-price-original,
+.dark-mode .shop-description {
+  color: rgba(230, 230, 230, 0.9);
+}
+
+.dark-mode .author-name {
+  color: linear-gradient(135deg, #28F29C 0%, #0CB8E0 50%);
+}
+
+/* Modal Styles */
 .modal-overlay {
   background-color: rgba(0, 0, 0, 0.5);
   transition: opacity 0.3s ease;
@@ -1020,6 +846,23 @@ textarea:focus {
   color: var(--fg);
 }
 
+/* Form Inputs */
+input,
+textarea {
+  background: rgba(255, 255, 255, 0.8);
+  color: #1a1a1a;
+  border: var(--border) solid var(--border-color);
+  transition: all 0.3s ease;
+}
+
+.dark-mode input,
+.dark-mode textarea {
+  background: rgba(30, 30, 30, 0.8);
+  color: #E0E0E0;
+  border-color: #444;
+}
+
+/* Buttons */
 .modal-close-btn {
   color: var(--fg);
   transition: all 0.3s var(--ease);
@@ -1051,7 +894,20 @@ textarea:focus {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
-/* Specific styles for categories within shop and blog modals */
+/* Form Focus States */
+input:focus,
+textarea:focus {
+  outline: none;
+  border-color: #28F29C;
+  box-shadow: 0 0 0 2px rgba(0, 255, 237, 0.2);
+}
+
+.dark-mode input:focus,
+.dark-mode textarea:focus {
+  box-shadow: 0 0 0 2px rgba(0, 255, 237, 0.4);
+}
+
+/* Shop and Blog Modal Specific Styles */
 .shop-modal-category,
 .blog-modal-category {
   background: linear-gradient(135deg, #28F29C 0%, #0CB8E0 50%);
@@ -1059,44 +915,157 @@ textarea:focus {
   display: inline-block;
 }
 
-/* MODULARIZATION: components/_module-card.scss */
-/*
- * Course Module Card Component
- * Styles for individual course module cards.
- * Usage: Apply 'module-card' to the main card container.
- * HTML Structure: <div class="module-card"><div class="module-number">...</div><h3>...</h3><p>...</p></div>
- */
-.module-card {
-  padding: 1.5rem;
-  display: flex;
-  flex-direction: column;
+.prose {
+  color: var(--fg);
+}
+
+.prose a {
+  color: #0CB8E0;
+  text-decoration: none;
   transition: all 0.3s var(--ease);
 }
 
-.module-card:hover {
-  transform: translateY(-5px);
+.prose a:hover {
+  color: #28F29C;
+  text-decoration: underline;
 }
 
-.module-number {
-  width: 2.5rem;
-  height: 2.5rem;
-  background: var(--gradient);
-  color: white;
-  border-radius: 50%;
+.dark-mode .prose {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.dark-mode .prose a {
+  color: #28F29C;
+}
+
+.dark-mode .prose a:hover {
+  color: #0CB8E0;
+}
+
+/* Alert Messages */
+.alert-message {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--radius);
   display: flex;
   align-items: center;
-  justify-content: center;
-  font-weight: bold;
-  margin-bottom: 1rem;
+  gap: 0.75rem;
+  z-index: 100;
+  animation: slideIn 0.3s ease forwards;
+  backdrop-filter: blur(10px);
 }
 
-/* MODULARIZATION: components/_back-to-home.scss */
-/*
- * Back to Home Button Component
- * Fixed button to navigate back to the home page.
- * Usage: Apply 'back-to-home' to an anchor tag.
- * HTML Structure: <a href="#" class="back-to-home">Back to Home</a>
- */
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.alert-success {
+  background: rgba(40, 167, 69, 0.2);
+  border: 1px solid rgba(40, 167, 69, 0.3);
+}
+
+.alert-error {
+  background: rgba(220, 53, 69, 0.2);
+  border: 1px solid rgba(220, 53, 69, 0.3);
+}
+
+.dark-mode .alert-success {
+  background: rgba(40, 167, 69, 0.3);
+}
+
+.dark-mode .alert-error {
+  background: rgba(220, 53, 69, 0.3);
+}
+
+/* Responsive Adjustments */
+@media (min-width: 768px) {
+  .w-full.max-w-sm {
+    max-width: 420px;
+  }
+}
+
+@media (max-width: 768px) {
+  .portfolio-section {
+    height: 50vh;
+    min-height: 320px;
+  }
+
+  .w-full.max-w-sm {
+    max-width: 100%;
+    padding: 0 1rem;
+  }
+
+  /* Shop Card Mobile Optimizations */
+  .shop-card {
+    width: 180px;
+    height: 75%;
+  }
+
+  .shop-title {
+    font-size: 12px;
+  }
+
+  .shop-price-current {
+    font-size: 0.8rem;
+  }
+
+  .shop-price-original,
+  .shop-description {
+    font-size: 10px;
+  }
+
+  .shop-buy-btn {
+    padding: 0.3rem;
+    font-size: 0.6rem;
+  }
+
+  .shop-info-btn {
+    width: 1.75rem;
+    height: 1.75rem;
+  }
+
+  /* Blog Card Mobile (unchanged) */
+  .blog-card {
+    padding: 12px;
+  }
+
+  .blog-image {
+    height: 135px;
+  }
+}
+
+@media (prefers-reduced-motion) {
+
+  .shop-card,
+  .blog-card,
+  .modal-container {
+    transition: none;
+  }
+
+  .shop-card img,
+  .blog-card img {
+    transition: none;
+  }
+}
+
+/* Smooth dark mode transitions */
+body {
+  transition: background-color 0.5s ease, color 0.3s ease;
+}
+
+/* ============ NAVIGATION BUTTONS ============ */
+
+/* Back to Home Button */
 .back-to-home {
   position: fixed;
   top: 2rem;
@@ -1135,14 +1104,7 @@ textarea:focus {
   transform: translateX(-3px);
 }
 
-/* MODULARIZATION: components/_back-to-top.scss */
-/*
- * Scroll to Top Button Component
- * Fixed button to scroll the page back to the top.
- * Usage: Apply 'scroll-to-top' to a button or div.
- * HTML Structure: <button class="scroll-to-top">...</button>
- * JavaScript Dependencies: Requires JS to toggle 'visible' class based on scroll position.
- */
+/* Scroll to Top Button */
 .scroll-to-top {
   position: fixed;
   bottom: 2rem;
@@ -1183,1152 +1145,6 @@ textarea:focus {
   transform: translateY(-2px);
 }
 
-/* ========================================================================== *
- * # LAYOUTS
- * ========================================================================== */
-
-/* MODULARIZATION: layouts/_app-content.scss */
-/*
- * App Content Layout
- * Main container for the application content, providing max-width and centering.
- * Usage: Apply 'app-content' to the main content wrapper.
- * HTML Structure: <div class="app-content">...</div>
- */
-.app-content {
-  width: 100%;
-  max-width: 375px;
-  margin: 0 auto;
-  padding-top: 10px;
-}
-
-/* MODULARIZATION: layouts/_header.scss */
-/*
- * Controls Container Layout
- * Positions control elements at the top of the page.
- * Usage: Apply 'controls-container' to a wrapper for theme toggles, etc.
- * HTML Structure: <div class="controls-container">...</div>
- */
-.controls-container {
-  position: absolute;
-  top: 1rem;
-  left: 1rem;
-  right: 1rem;
-  z-index: 10;
-}
-
-.theme-toggle-container {
-  position: relative;
-}
-
-.portfolio-toggle-container {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  z-index: 10;
-  display: flex;
-  gap: 0.5rem;
-}
-
-/* MODULARIZATION: layouts/_portfolio-section.scss */
-/*
- * Portfolio Section Layout
- * Defines the height and overflow for the portfolio display area.
- * Usage: Apply 'portfolio-section' to the main portfolio wrapper.
- * HTML Structure: <section class="portfolio-section">...</section>
- */
-.portfolio-section {
-  height: 52vh;
-  min-height: 350px;
-  max-height: 600px;
-  position: relative;
-  overflow: hidden;
-}
-
-/* MODULARIZATION: layouts/_shop-container.scss */
-/*
- * Shop Container Layout
- * Horizontal scrolling container for shop cards.
- * Usage: Apply 'shop-container' to the wrapper holding multiple shop cards.
- * HTML Structure: <div class="shop-container">...</div>
- */
-.shop-container {
-  display: flex;
-  gap: 0.5rem;
-  padding: 0.25rem 0.5rem;
-  height: 100%;
-  overflow-x: auto;
-  overflow-y: visible;
-  scrollbar-width: thin; /* Firefox */
-  scrollbar-color: rgba(255, 255, 255, 0.3) rgba(255, 255, 255, 0.1); /* Firefox */
-  flex-wrap: nowrap;
-  align-items: flex-start;
-}
-
-.shop-container::-webkit-scrollbar {
-  height: 4px;
-}
-
-.shop-container::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0.1);
-}
-
-.shop-container::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.3);
-  border-radius: 2px;
-}
-
-/* MODULARIZATION: layouts/_blog-container.scss */
-/*
- * Blog Container Layout
- * Vertical scrolling container for blog cards.
- * Usage: Apply 'blog-container' to the wrapper holding multiple blog cards.
- * HTML Structure: <div class="blog-container">...</div>
- */
-.blog-container {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-  width: 100%;
-  padding: 0.5rem;
-  height: calc(100% - 50px);
-  overflow-y: auto;
-  scrollbar-width: thin; /* Firefox */
-  scrollbar-color: rgba(255, 255, 255, 0.3) rgba(255, 255, 255, 0.1); /* Firefox */
-}
-
-.blog-container::-webkit-scrollbar {
-  width: 4px;
-}
-
-.blog-container::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0.1);
-}
-
-.blog-container::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.3);
-  border-radius: 2px;
-}
-
-/* MODULARIZATION: layouts/_post-article.scss */
-/*
- * Post Article Layout
- * Main container for a single blog post article.
- * Usage: Apply 'post-article' to the main article wrapper.
- * HTML Structure: <article class="post-article">...</article>
- */
-.post-article {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 2rem 1rem;
-}
-
-/* MODULARIZATION: layouts/_post-article.scss */
-/*
- * Post Hero Section Layout
- * Hero section for a blog post, typically containing an image and title.
- * Usage: Apply 'post-hero' to the hero section wrapper.
- * HTML Structure: <section class="post-hero">...</section>
- */
-.post-hero {
-  position: relative;
-  margin-bottom: 3rem;
-  border-radius: var(--radius);
-  overflow: hidden;
-  background: var(--card-bg);
-  backdrop-filter: blur(16px) saturate(180%);
-  -webkit-backdrop-filter: blur(16px) saturate(180%);
-  border: var(--border) solid var(--border-color);
-  box-shadow: var(--shadow);
-}
-
-/* MODULARIZATION: layouts/_post-article.scss */
-/*
- * Post Hero Image Layout
- * Container for the main image in the post hero section.
- * Usage: Apply 'post-hero__image-wrapper' to the image container.
- * HTML Structure: <div class="post-hero__image-wrapper"><img></div>
- * JavaScript Dependencies: 'show-content' class toggled by JS for content visibility.
- */
-.post-hero__image-wrapper {
-  position: relative;
-  width: 100%;
-  height: 400px;
-  overflow: hidden;
-  cursor: pointer;
-}
-
-.post-hero__image-wrapper.image-loading {
-  background: linear-gradient(90deg,
-    rgba(255, 255, 255, 0.1) 0%,
-    rgba(255, 255, 255, 0.2) 50%,
-    rgba(255, 255, 255, 0.1) 100%);
-  background-size: 200% 100%;
-  animation: shimmer 2s infinite;
-}
-
-.post-hero__image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 0;
-  transition: transform 0.6s var(--ease), opacity 0.3s ease;
-}
-
-.post-hero__image:hover {
-  transform: scale(1.05);
-}
-
-/* MODULARIZATION: layouts/_post-article.scss */
-/*
- * Post Categories Overlay Layout
- * Positions category badges over the hero image.
- * Usage: Apply 'post-categories-overlay' to the wrapper for category badges.
- * HTML Structure: <div class="post-categories-overlay">...</div>
- */
-.post-categories-overlay {
-  position: absolute;
-  top: 1rem;
-  left: 1rem;
-  z-index: 10;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-}
-
-/* MODULARIZATION: layouts/_post-article.scss */
-/*
- * Post Header Content Layout
- * Hidden content that appears on image click in the hero section.
- * Usage: Apply 'post-header-content' to the content block.
- * HTML Structure: <div class="post-header-content">...</div>
- */
-.post-header-content {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding: 2.5rem;
-  background: linear-gradient(
-    to top,
-    rgba(0, 0, 0, 0.9) 0%,
-    rgba(0, 0, 0, 0.7) 50%,
-    rgba(0, 0, 0, 0.3) 80%,
-    transparent 100%
-  );
-  color: white;
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(20px);
-  transition: all 0.4s var(--ease);
-}
-
-/* Show hidden content when image is clicked */
-.post-hero__image-wrapper.show-content .post-header-content {
-  opacity: 1;
-  visibility: visible;
-  transform: translateY(0);
-}
-
-/* Add a subtle overlay when content is visible */
-.post-hero__image-wrapper.show-content::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.2);
-  z-index: 1;
-  transition: opacity 0.3s ease;
-}
-
-.post-hero__image-wrapper.show-content .post-header-content {
-  z-index: 2;
-}
-
-.post-hero__image-wrapper.show-content .post-categories-overlay {
-  z-index: 3;
-}
-
-/* Dark mode adjustments for post header content */
-.dark-mode .post-header-content {
-  background: linear-gradient(
-    to top,
-    rgba(0, 0, 0, 0.95) 0%,
-    rgba(0, 0, 0, 0.8) 50%,
-    rgba(0, 0, 0, 0.4) 80%,
-    transparent 100%
-  );
-}
-
-/* MODULARIZATION: layouts/_post-article.scss */
-/*
- * Post Meta Information Layout
- * Displays date and read time for a blog post.
- * Usage: Apply 'post-meta' to the container.
- * HTML Structure: <div class="post-meta">...</div>
- */
-.post-meta {
-  display: flex;
-  align-items: center;
-  gap: 1.5rem;
-  margin-bottom: 1rem;
-  font-size: 0.875rem;
-  color: rgba(255, 255, 255, 0.9);
-}
-
-.post-meta__date {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-weight: 500;
-  color: rgba(255, 255, 255, 0.9);
-}
-
-.post-meta__date::before {
-  content: '📅';
-  font-size: 0.75rem;
-}
-
-.post-meta__read-time {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-weight: 500;
-  color: rgba(255, 255, 255, 0.9);
-}
-
-.post-meta__read-time i {
-  font-size: 0.75rem;
-  opacity: 0.8;
-}
-
-/* MODULARIZATION: layouts/_post-article.scss */
-/*
- * Post Title Layout
- * Main title for a blog post.
- * Usage: Apply 'post-title' to the heading element.
- * HTML Structure: <h1 class="post-title">...</h1>
- */
-.post-title {
-  font-size: clamp(1.75rem, 5vw, 3rem);
-  font-variation-settings: 'wght' 700;
-  line-height: 1.2;
-  margin: 0 0 1rem 0;
-  color: white;
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
-}
-
-/* MODULARIZATION: layouts/_post-article.scss */
-/*
- * Post Content Layout
- * Main content area for a blog post.
- * Usage: Apply 'post-content' to the content wrapper.
- * HTML Structure: <div class="post-content">...</div>
- */
-.post-content {
-  margin-top: 2rem;
-  padding: 3rem;
-}
-
-/* MODULARIZATION: layouts/_product-article.scss */
-/*
- * Product Article Layout
- * Main container for a single product detail page.
- * Usage: Apply 'product-article' to the main article wrapper.
- * HTML Structure: <article class="product-article">...</article>
- */
-.product-article {
-  max-width: 1200px;
-  margin: 2rem auto;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-  border: none;
-}
-
-.product-article > * {
-  margin: 0;
-  padding: 0;
-}
-
-/* MODULARIZATION: layouts/_product-article.scss */
-/*
- * Product Hero Section Layout
- * Hero section for a product page, typically with image and details.
- * Usage: Apply 'product-hero' to the hero section wrapper.
- * HTML Structure: <section class="product-hero">...</section>
- */
-.product-hero {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 2rem;
-  margin-bottom: 3rem;
-}
-
-.product-hero img {
-  width: 100%;
-  height: auto;
-  object-fit: cover;
-  border-radius: var(--radius);
-}
-
-/* MODULARIZATION: layouts/_product-article.scss */
-/*
- * Product Hero Image Layout
- * Container for the main image in the product hero section.
- * Usage: Apply 'product-hero__image-wrapper' to the image container.
- * HTML Structure: <div class="product-hero__image-wrapper"><img></div>
- * Variants: '[data-zoomable]' attribute for zoom effect on hover.
- */
-.product-hero__image-wrapper {
-  width: 100%;
-  height: 400px;
-  border-radius: var(--radius);
-  overflow: hidden;
-  position: relative;
-}
-
-.product-hero__image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.5s var(--ease);
-}
-
-.product-hero__image-wrapper[data-zoomable]:hover .product-hero__image {
-  transform: scale(1.05);
-}
-
-/* MODULARIZATION: layouts/_product-article.scss */
-/*
- * Product Header Content Layout
- * Contains product title, price, and category.
- * Usage: Apply 'product-header-content' to the content block.
- * HTML Structure: <div class="product-header-content">...</div>
- */
-.product-header-content {
-  padding: 1.5rem;
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-}
-
-.product-header-content h1,
-.product-header-content h2,
-.product-header-content h3 {
-  margin: 0;
-  line-height: 1.2;
-}
-
-/* MODULARIZATION: layouts/_product-article.scss */
-/*
- * Product Meta Layout
- * Displays product category and price information.
- * Usage: Apply 'product-meta' to the container.
- * HTML Structure: <div class="product-meta">...</div>
- */
-.product-meta {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.product-meta__category {
-  background: var(--gradient);
-  color: white;
-  padding: 0.5rem 1.25rem;
-  border-radius: 2rem;
-  font-size: 0.8rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
-
-.product-meta__price {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-}
-
-.product-meta__original-price {
-  text-decoration: line-through;
-  opacity: 0.7;
-  font-size: 1rem;
-}
-
-.product-meta__current-price {
-  font-size: 1.8rem;
-  font-weight: 700;
-}
-
-/* MODULARIZATION: layouts/_product-article.scss */
-/*
- * Product Title Layout
- * Main title for a product.
- * Usage: Apply 'product-title' to the heading element.
- * HTML Structure: <h1 class="product-title">...</h1>
- */
-.product-title {
-  font-size: clamp(1.8rem, 5vw, 2.5rem);
-  font-variation-settings: 'wght' 700;
-  line-height: 1.2;
-  margin: 0;
-  background: var(--gradient);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
-
-/* MODULARIZATION: layouts/_product-article.scss */
-/*
- * Product Description Layout
- * Detailed description for a product.
- * Usage: Apply 'product-description' to the paragraph element.
- * HTML Structure: <p class="product-description">...</p>
- */
-.product-description {
-  font-size: 1.1rem;
-  line-height: 1.6;
-  opacity: 0.9;
-}
-
-/* Dark mode adjustments for product description */
-.dark-mode .product-description {
-  opacity: 0.85;
-}
-
-/* MODULARIZATION: layouts/_product-article.scss */
-/*
- * Product Features Layout
- * Section for listing product features.
- * Usage: Apply 'product-features' to the section wrapper.
- * HTML Structure: <section class="product-features"><h3>...</h3><ul><li>...</li></ul></section>
- */
-.product-features {
-  margin: 2rem 0;
-}
-
-.product-features h3 {
-  font-size: 1.25rem;
-  margin-bottom: 1.5rem;
-  font-variation-settings: 'wght' 600;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.product-features h3::before {
-  content: '';
-  display: block;
-  width: 1.5rem;
-  height: 2px;
-  background: var(--gradient);
-}
-
-.product-features ul {
-  list-style: none;
-  padding: 0;
-  display: grid;
-  gap: 1rem;
-}
-
-.product-features__item {
-  display: flex;
-  align-items: flex-start;
-  gap: 0.75rem;
-  padding: 0.5rem 0;
-}
-
-.product-features__item span:last-child {
-  font-size: 1rem;
-  line-height: 1.5;
-}
-
-.product-features__icon {
-  color: #28F29C;
-  font-size: 1rem;
-  margin-top: 0.2rem;
-  flex-shrink: 0;
-}
-
-/* MODULARIZATION: layouts/_product-article.scss */
-/*
- * Product Actions Layout
- * Container for product action buttons (e.g., Add to Cart).
- * Usage: Apply 'product-actions' to the button wrapper.
- * HTML Structure: <div class="product-actions">...</div>
- */
-.product-actions {
-  display: flex;
-  gap: 1rem;
-  margin: 2rem 0;
-}
-
-/* MODULARIZATION: layouts/_product-article.scss */
-/*
- * Product Guarantee Layout
- * Displays a guarantee message for the product.
- * Usage: Apply 'product-guarantee' to the message container.
- * HTML Structure: <div class="product-guarantee">...</div>
- */
-.product-guarantee {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  font-size: 0.9rem;
-  opacity: 0.9;
-  padding: 0.75rem;
-  border-radius: var(--radius);
-  background: rgba(255, 255, 255, 0.05);
-}
-
-/* Dark mode adjustments for product guarantee */
-.dark-mode .product-guarantee {
-  background: rgba(255, 255, 255, 0.05);
-}
-
-/* MODULARIZATION: layouts/_product-article.scss */
-/*
- * Product Content Layout
- * Main content area for a product detail page, often containing rich text.
- * Usage: Apply 'product-content' to the content wrapper.
- * HTML Structure: <div class="product-content">...</div>
- */
-.product-content {
-  padding: 2rem;
-  background: var(--card-bg);
-  border-radius: var(--radius);
-  margin-top: 2rem;
-}
-
-.product-content .prose {
-  max-width: 100%;
-  color: var(--fg);
-  line-height: 1.7;
-}
-
-.product-content .prose h2,
-.product-content .prose h3,
-.product-content .prose h4 {
-  margin-top: 2rem;
-  margin-bottom: 1rem;
-  font-variation-settings: 'wght' 600;
-}
-
-.product-content .prose h2 {
-  font-size: 1.75rem;
-  border-bottom: 2px solid var(--border-color);
-  padding-bottom: 0.5rem;
-}
-
-.product-content .prose h3 {
-  font-size: 1.5rem;
-}
-
-.product-content .prose p {
-  margin-bottom: 1.5rem;
-  font-size: 1.1rem;
-}
-
-.product-content .prose ul,
-.product-content .prose ol {
-  padding-left: 1.5rem;
-  margin-bottom: 1.5rem;
-}
-
-.product-content .prose ul li {
-  position: relative;
-}
-
-.product-content .prose ul li::marker {
-  color: #28F29C;
-}
-
-.product-content .prose img {
-  max-width: 100%;
-  height: auto;
-  border-radius: var(--radius);
-  margin: 1.5rem 0;
-}
-
-/* MODULARIZATION: layouts/_product-article.scss */
-/*
- * Course Modules Layout
- * Container for a list of course modules.
- * Usage: Apply 'course-modules' to the section wrapper.
- * HTML Structure: <section class="course-modules"><h3>...</h3><div class="modules-container">...</div></section>
- */
-.course-modules {
-  margin-top: 3rem;
-}
-
-.course-modules__title {
-  font-size: 1.5rem;
-  margin-bottom: 1.5rem;
-  display: flex;
-  align-items: center;
-}
-
-.course-modules__container {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: 1rem;
-}
-
-/* MODULARIZATION: layouts/_product-article.scss */
-/*
- * Product Call to Action (CTA) Layout
- * Final call to action section on a product page.
- * Usage: Apply 'product-cta' to the section wrapper.
- * HTML Structure: <section class="product-cta"><h2>...</h2><button class="btn-primary">...</button></section>
- */
-.product-cta {
-  padding: 3rem 2rem;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1.5rem;
-}
-
-.product-cta h2 {
-  font-size: 1.8rem;
-  margin: 0;
-}
-
-.product-cta .btn-primary {
-  max-width: 300px;
-}
-
-/* MODULARIZATION: layouts/_modal-layout.scss */
-/*
- * Shop Item Modal Layout
- * Layout for the detailed view of a shop item within a modal.
- * Usage: Apply 'shop-item-layout' to the main content area of the modal.
- * HTML Structure: <div class="shop-item-layout">...</div>
- */
-.shop-item-layout {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 2rem;
-  align-items: start;
-}
-
-.shop-item-image {
-  width: 100%;
-  height: 400px;
-  object-fit: cover;
-  border-radius: var(--radius);
-}
-
-.shop-item-details {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-}
-
-.shop-item-title {
-  font-size: 2rem;
-  font-weight: 700;
-  line-height: 1.2;
-}
-
-.shop-item-price {
-  font-size: 1.5rem;
-  font-weight: 600;
-}
-
-.shop-item-description {
-  font-size: 1.125rem;
-  line-height: 1.6;
-}
-
-.shop-item-actions {
-  display: flex;
-  gap: 1rem;
-  margin-top: 1rem;
-}
-
-.shop-item-buy-btn {
-  flex: 1;
-  padding: 1rem 2rem;
-  font-size: 1.125rem;
-  font-weight: 600;
-  border-radius: var(--radius);
-}
-
-.shop-item-features {
-  margin-top: 2rem;
-}
-
-.shop-item-features h3 {
-  font-size: 1.25rem;
-  margin-bottom: 1rem;
-}
-
-.shop-item-features ul {
-  list-style: none;
-  padding: 0;
-}
-
-.shop-item-features li {
-  padding: 0.5rem 0;
-  border-bottom: 1px solid var(--border-color);
-  font-size: 1rem;
-}
-
-/* MODULARIZATION: layouts/_modal-layout.scss */
-/*
- * Blog Item Modal Layout
- * Layout for the detailed view of a blog item within a modal.
- * Usage: Apply 'blog-modal-container' to the modal content.
- * HTML Structure: <div class="blog-modal-container">...</div>
- */
-.blog-modal-container {
-  max-width: 1000px;
-  margin: 2rem auto;
-}
-
-.blog-modal-content {
-  padding: 2rem;
-}
-
-.blog-modal-image {
-  width: 100%;
-  height: 400px;
-  object-fit: cover;
-  border-radius: var(--radius);
-  margin-bottom: 2rem;
-}
-
-.blog-modal-title {
-  font-size: 2.25rem;
-  font-weight: 700;
-  line-height: 1.2;
-  margin-bottom: 1.5rem;
-}
-
-.blog-modal-meta {
-  margin-bottom: 2rem;
-  font-size: 1rem;
-}
-
-.blog-modal-excerpt {
-  font-size: 1.125rem;
-  line-height: 1.6;
-  margin-bottom: 2rem;
-}
-
-.blog-modal-content-text {
-  font-size: 1.125rem;
-  line-height: 1.7;
-}
-
-/* MODULARIZATION: layouts/_modal-layout.scss */
-/*
- * Modal Actions Layout
- * Container for action buttons within a modal.
- * Usage: Apply 'modal-actions' to the button wrapper.
- * HTML Structure: <div class="modal-actions">...</div>
- */
-.modal-actions {
-  display: flex;
-  gap: 1rem;
-  justify-content: flex-end;
-  margin-top: 2rem;
-  padding-top: 2rem;
-  border-top: 1px solid var(--border-color);
-}
-
-.modal-actions button {
-  padding: 0.75rem 2rem;
-  font-size: 1rem;
-  min-width: 120px;
-}
-
-/* ========================================================================== *
- * # UTILITIES
- * ========================================================================== */
-
-/* MODULARIZATION: utilities/_pwa-loader.scss */
-/*
- * PWA Loader Utility
- * Full-screen loader for Progressive Web Apps.
- * Usage: Apply 'pwa-loader' to the loader element.
- * HTML Structure: <div class="pwa-loader">...</div>
- */
-.pwa-loader {
-  position: fixed;
-  inset: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: var(--bg);
-  z-index: 9999;
-  transition: opacity 0.3s;
-}
-
-/* MODULARIZATION: utilities/_text-gradients.scss */
-/*
- * Gradient Text Utility
- * Applies a gradient fill to text.
- * Usage: Apply 'gradient-text' to text elements.
- * HTML Structure: <span class="gradient-text">...</span>
- */
-.gradient-text {
-  background: linear-gradient(135deg, #28F29C 0%, #0CB8E0 50%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  display: inline-block;
-  background-size: 100%;
-  background-repeat: no-repeat;
-  padding-bottom: 2px;
-}
-
-/* Dark mode adjustment for gradient text */
-.dark-mode .gradient-text {
-  text-shadow: 0 0 12px rgba(12, 184, 224, 0.4);
-}
-
-/*
- * Gradient Icon Utility
- * Applies a gradient fill to icons.
- * Usage: Apply 'gradient-icon' or 'fa-gradient' to icon elements.
- * HTML Structure: <i class="gradient-icon">...</i> or <i class="fa-gradient">...</i>
- */
-.gradient-icon,
-.fa-gradient {
-  background: linear-gradient(135deg, #28F29C 0%, #0CB8E0 50%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  display: inline-block;
-}
-
-/* MODULARIZATION: utilities/_image-loading.scss */
-/*
- * Image Loading Utility
- * Placeholder and shimmer effect for images while loading.
- * Usage: Apply 'image-loading' to the image container.
- * HTML Structure: <div class="image-loading"><img></div>
- */
-.image-loading {
-  position: relative;
-  background: rgba(255, 255, 255, 0.1);
-  overflow: hidden;
-}
-
-.image-loading::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: linear-gradient(90deg,
-      transparent,
-      rgba(255, 255, 255, 0.1),
-      transparent);
-  animation: loading 1.5s infinite;
-}
-
-/*
- * Lazy Image Utility
- * Handles opacity transition for lazy-loaded images.
- * Usage: Apply 'lazy-img' to the image, and 'loaded' class when image is loaded.
- * HTML Structure: <img class="lazy-img" src="..." alt="...">
- * JavaScript Dependencies: Requires JS to add 'loaded' class.
- */
-.lazy-img {
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.lazy-img.loaded {
-  opacity: 1;
-}
-
-/* MODULARIZATION: utilities/_ripple-effect.scss */
-/*
- * Ripple Effect Utility
- * Creates a click ripple animation.
- * Usage: Dynamically add 'ripple-effect' class with JS on click.
- * HTML Structure: Dynamically created div.
- * JavaScript Dependencies: Requires JS to create and manage the ripple element.
- */
-.ripple-effect {
-  position: absolute;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.3);
-  width: 100px;
-  height: 100px;
-  margin-left: -50px;
-  margin-top: -50px;
-  animation: ripple 0.6s ease-out;
-  pointer-events: none;
-  z-index: 5;
-}
-
-/* MODULARIZATION: utilities/_animations.scss */
-/*
- * Fade In Animation Utility
- * Applies a fade-in and slide-up animation.
- * Usage: Apply 'fade-in' class to elements that should animate on load.
- * HTML Structure: <div class="fade-in">...</div>
- */
-.fade-in {
-  animation: fadeIn 0.3s ease forwards;
-}
-
-/* MODULARIZATION: utilities/_animations.scss */
-/*
- * Pulse Animation Utility
- * Applies a pulsing scale animation.
- * Usage: Apply 'pulse' class to elements that should pulse.
- * HTML Structure: <div class="pulse">...</div>
- */
-.pulse {
-  animation: pulse 2s infinite;
-}
-
-/* ========================================================================== *
- * # ANIMATIONS
- * ========================================================================== */
-
-/* MODULARIZATION: utilities/_animations.scss */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* MODULARIZATION: utilities/_animations.scss */
-@keyframes shimmer {
-  0% {
-    background-position: -200% 0;
-  }
-  100% {
-    background-position: 200% 0;
-  }
-}
-
-/* MODULARIZATION: utilities/_animations.scss */
-@keyframes ripple {
-  0% {
-    transform: scale(0);
-    opacity: 1;
-  }
-  100% {
-    transform: scale(2);
-    opacity: 0;
-  }
-}
-
-/* MODULARIZATION: utilities/_animations.scss */
-@keyframes loading {
-  0% {
-    transform: translateX(-100%);
-  }
-  100% {
-    transform: translateX(100%);
-  }
-}
-
-/* MODULARIZATION: utilities/_animations.scss */
-@keyframes pulse {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.05); }
-  100% { transform: scale(1); }
-}
-
-/* MODULARIZATION: utilities/_animations.scss */
-@keyframes slideIn {
-  from {
-    transform: translateX(100%);
-    opacity: 0;
-  }
-  to {
-    transform: translateX(0);
-    opacity: 1;
-  }
-}
-
-/* ========================================================================== *
- * # RESPONSIVE DESIGN
- * ========================================================================== */
-
-/* MODULARIZATION: responsive/_desktop.scss */
-/*
- * Global Responsive Adjustments
- * Adjustments for general elements across different screen sizes.
- */
-@media (min-width: 768px) {
-  .w-full.max-w-sm {
-    max-width: 420px;
-  }
-}
-
-/* MODULARIZATION: responsive/_mobile.scss */
-@media (max-width: 768px) {
-  .portfolio-section {
-    height: 50vh;
-    min-height: 320px;
-  }
-
-  .w-full.max-w-sm {
-    max-width: 100%;
-    padding: 0 1rem;
-  }
-
-  /* Shop Card Mobile Optimizations */
-  .shop-card {
-    width: 180px;
-    height: 75%;
-  }
-
-  .shop-card__title {
-    font-size: 12px;
-  }
-
-  .shop-card__price-current {
-    font-size: 0.8rem;
-  }
-
-  .shop-card__price-original,
-  .shop-card__description {
-    font-size: 10px;
-  }
-
-  .shop-card__buy-btn {
-    padding: 0.3rem;
-    font-size: 0.6rem;
-  }
-
-  .shop-card__info-btn {
-    width: 1.75rem;
-    height: 1.75rem;
-  }
-
-  /* Blog Card Mobile (unchanged) */
-  .blog-card {
-    padding: 12px;
-  }
-
-  .blog-card__image-wrapper {
-    height: 135px;
-  }
-}
-
-/* MODULARIZATION: responsive/_mobile.scss */
 /* Mobile Navigation Adjustments */
 @media (max-width: 768px) {
   .back-to-home {
@@ -2350,7 +1166,544 @@ textarea:focus {
   }
 }
 
-/* MODULARIZATION: responsive/_desktop.scss */
+/* ============ BLOG POST STYLES ============ */
+
+/* Post Article Container */
+.post-article {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+  
+  @media (max-width: 768px) {
+    padding: 1rem 0.5rem;
+  }
+}
+
+/* ============ HERO SECTION ============ */
+.post-hero {
+  position: relative;
+  margin-bottom: 3rem;
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--card-bg);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
+  border: var(--border) solid var(--border-color);
+  box-shadow: var(--shadow);
+  
+  @media (max-width: 768px) {
+    margin-bottom: 2rem;
+  }
+}
+
+/* Hero Image Container */
+.post-hero-image {
+  position: relative;
+  width: 100%;
+  height: 400px;
+  overflow: hidden;
+  cursor: pointer;
+  
+  &.image-loading {
+    background: linear-gradient(90deg, 
+      rgba(255, 255, 255, 0.1) 0%, 
+      rgba(255, 255, 255, 0.2) 50%, 
+      rgba(255, 255, 255, 0.1) 100%);
+    background-size: 200% 100%;
+    animation: shimmer 2s infinite;
+  }
+  
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 0;
+    transition: transform 0.6s var(--ease), opacity 0.3s ease;
+    
+    &:hover {
+      transform: scale(1.05);
+    }
+  }
+  
+  @media (max-width: 768px) {
+    height: 250px;
+  }
+}
+
+/* Category Badge in Top Left Corner */
+.post-categories-overlay {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  z-index: 10;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  
+  @media (max-width: 768px) {
+    top: 0.75rem;
+    left: 0.75rem;
+  }
+}
+
+.post-category-badge {
+  padding: 0.375rem 0.875rem;
+  border-radius: 1rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  background: var(--gradient);
+  color: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s var(--ease);
+  backdrop-filter: blur(10px);
+  
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  }
+  
+  @media (max-width: 768px) {
+    font-size: 0.6875rem;
+    padding: 0.25rem 0.625rem;
+  }
+}
+
+/* Hidden Content (initially invisible) */
+.post-header-content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 2.5rem;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.9) 0%,
+    rgba(0, 0, 0, 0.7) 50%,
+    rgba(0, 0, 0, 0.3) 80%,
+    transparent 100%
+  );
+  color: white;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(20px);
+  transition: all 0.4s var(--ease);
+  
+  @media (max-width: 768px) {
+    padding: 1.5rem;
+  }
+}
+
+/* Show hidden content when image is clicked */
+.post-hero-image.show-content .post-header-content {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+/* Add a subtle overlay when content is visible */
+.post-hero-image.show-content::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  transition: opacity 0.3s ease;
+}
+
+.post-hero-image.show-content .post-header-content {
+  z-index: 2;
+}
+
+.post-hero-image.show-content .post-categories-overlay {
+  z-index: 3;
+}
+
+/* Post Meta Information */
+.post-meta {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 1rem;
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.9);
+  
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+}
+
+.post-date {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.9);
+  
+  &::before {
+    content: '📅';
+    font-size: 0.75rem;
+  }
+}
+
+.post-read-time {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.9);
+  
+  i {
+    font-size: 0.75rem;
+    opacity: 0.8;
+  }
+}
+
+/* Post Title */
+.post-title {
+  font-size: clamp(1.75rem, 5vw, 3rem);
+  font-variation-settings: 'wght' 700;
+  line-height: 1.2;
+  margin: 0 0 1rem 0;
+  color: white;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+  
+  @media (max-width: 768px) {
+    font-size: clamp(1.5rem, 4vw, 2rem);
+  }
+}
+
+/* Click indicator for mobile */
+.post-hero-image::after {
+  content: 'Нажмите для просмотра деталей';
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.7);
+  background: rgba(0, 0, 0, 0.6);
+  padding: 0.5rem 1rem;
+  border-radius: 2rem;
+  backdrop-filter: blur(10px);
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all 0.3s var(--ease);
+  pointer-events: none;
+  
+  @media (max-width: 768px) {
+    font-size: 0.625rem;
+    padding: 0.375rem 0.75rem;
+    bottom: 0.75rem;
+    right: 0.75rem;
+  }
+}
+
+.post-hero-image:hover::after {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.post-hero-image.show-content::after {
+  content: 'Нажмите чтобы скрыть';
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ============ MAIN CONTENT ============ */
+.post-content {
+  margin-top: 2rem;
+  padding: 3rem;
+  
+  @media (max-width: 768px) {
+    padding: 2rem 1.5rem;
+    margin-top: 1.5rem;
+  }
+}
+
+/* Enhanced Prose Styles */
+.post-content .prose {
+  max-width: none;
+  color: var(--fg);
+  line-height: 1.7;
+  
+  /* Headings */
+  h1, h2, h3, h4, h5, h6 {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    font-variation-settings: 'wght' 600;
+    color: var(--fg);
+  }
+  
+  h1 {
+    font-size: 2.25rem;
+    font-variation-settings: 'wght' 700;
+  }
+  
+  h2 {
+    font-size: 1.875rem;
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 0.5rem;
+  }
+  
+  h3 {
+    font-size: 1.5rem;
+  }
+  
+  h4 {
+    font-size: 1.25rem;
+  }
+  
+  /* Paragraphs */
+  p {
+    margin-bottom: 1.5rem;
+    font-variation-settings: 'wght' 400;
+    
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+  
+  /* Lists */
+  ul, ol {
+    margin-bottom: 1.5rem;
+    padding-left: 1.5rem;
+    
+    li {
+      margin-bottom: 0.5rem;
+      line-height: 1.6;
+    }
+  }
+  
+  ul {
+    list-style: none;
+    
+    li {
+      position: relative;
+      padding-left: 1.5rem;
+      
+      &::before {
+        content: '▸';
+        position: absolute;
+        left: 0;
+        color: #0CB8E0;
+        font-weight: bold;
+      }
+    }
+  }
+  
+  /* Blockquotes */
+  blockquote {
+    margin: 2rem 0;
+    padding: 1.5rem;
+    border-left: 4px solid var(--gradient);
+    background: var(--card-bg);
+    border-radius: var(--radius);
+    font-style: italic;
+    position: relative;
+    
+    &::before {
+      content: '"';
+      position: absolute;
+      top: -0.5rem;
+      left: 1rem;
+      font-size: 3rem;
+      color: #0CB8E0;
+      opacity: 0.3;
+    }
+    
+    p {
+      margin: 0;
+      font-size: 1.1rem;
+    }
+  }
+  
+  /* Code Blocks */
+  pre {
+    background: var(--card-bg);
+    border: var(--border) solid var(--border-color);
+    border-radius: var(--radius);
+    padding: 1.5rem;
+    overflow-x: auto;
+    margin: 1.5rem 0;
+    font-family: 'Fira Code', 'Monaco', 'Cascadia Code', monospace;
+    font-size: 0.875rem;
+    line-height: 1.5;
+  }
+  
+  /* Inline Code */
+  code {
+    background: rgba(0, 0, 0, 0.05);
+    padding: 0.2rem 0.4rem;
+    border-radius: 0.25rem;
+    font-family: 'Fira Code', 'Monaco', 'Cascadia Code', monospace;
+    font-size: 0.875em;
+    color: #e11d48;
+  }
+  
+  .dark-mode & code {
+    background: rgba(255, 255, 255, 0.1);
+    color: #fbbf24;
+  }
+  
+  /* Images */
+  img {
+    max-width: 100%;
+    height: auto;
+    border-radius: var(--radius);
+    margin: 1.5rem 0;
+    box-shadow: var(--shadow);
+  }
+  
+  /* Tables */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+    background: var(--card-bg);
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    
+    th, td {
+      padding: 1rem;
+      text-align: left;
+      border-bottom: 1px solid var(--border-color);
+    }
+    
+    th {
+      background: var(--gradient);
+      color: white;
+      font-weight: 600;
+      text-transform: uppercase;
+      font-size: 0.875rem;
+      letter-spacing: 0.5px;
+    }
+    
+    tr:hover {
+      background: rgba(0, 0, 0, 0.02);
+    }
+  }
+  
+  .dark-mode & table tr:hover {
+    background: rgba(255, 255, 255, 0.02);
+  }
+  
+  /* Horizontal Rules */
+  hr {
+    border: none;
+    height: 2px;
+    background: var(--gradient);
+    margin: 3rem 0;
+    border-radius: 1px;
+  }
+}
+
+/* ============ ANIMATIONS ============ */
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* Ripple Effect */
+.ripple-effect {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  width: 100px;
+  height: 100px;
+  margin-left: -50px;
+  margin-top: -50px;
+  animation: ripple 0.6s ease-out;
+  pointer-events: none;
+  z-index: 5;
+}
+
+@keyframes ripple {
+  0% {
+    transform: scale(0);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
+/* ============ DARK MODE OVERRIDES ============ */
+.dark-mode {
+  .post-header-content {
+    background: linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0.95) 0%,
+      rgba(0, 0, 0, 0.8) 50%,
+      rgba(0, 0, 0, 0.4) 80%,
+      transparent 100%
+    );
+  }
+  
+  .post-content .prose {
+    color: rgba(255, 255, 255, 0.9);
+    
+    h1, h2, h3, h4, h5, h6 {
+      color: rgba(255, 255, 255, 0.95);
+      text-shadow: var(--text-shadow);
+    }
+    
+    blockquote {
+      background: rgba(255, 255, 255, 0.05);
+      color: rgba(255, 255, 255, 0.9);
+    }
+    
+    pre {
+      background: rgba(0, 0, 0, 0.3);
+      color: rgba(255, 255, 255, 0.9);
+    }
+  }
+}
+
+/* ============ RESPONSIVE DESIGN ============ */
+@media (max-width: 768px) {
+  .post-hero {
+    border-radius: 12px;
+  }
+  
+  .post-content {
+    border-radius: 12px;
+  }
+  
+  .post-content .prose {
+    h1 {
+      font-size: 1.875rem;
+    }
+    
+    h2 {
+      font-size: 1.5rem;
+    }
+    
+    h3 {
+      font-size: 1.25rem;
+    }
+    
+    table {
+      font-size: 0.875rem;
+      
+      th, td {
+        padding: 0.75rem 0.5rem;
+      }
+    }
+  }
+}
+
 /* Blog Post Desktop Styles */
 @media (min-width: 1024px) {
   .post-article {
@@ -2361,32 +1714,488 @@ textarea:focus {
   .post-content .prose {
     max-width: var(--desktop-content-width);
     margin: 0 auto;
-  }
-
-  .post-content .prose img {
-    max-width: 120%;
-    margin-left: -10%;
+    
+    img {
+      max-width: 120%;
+      margin-left: -10%;
+    }
   }
 
   .blog-card {
     flex-direction: row;
     height: 250px;
-  }
-
-  .blog-card__image-wrapper {
-    width: 40%;
-    height: 100%;
-    flex-shrink: 0;
-  }
-
-  .blog-card__content {
-    padding: 1.5rem;
-    width: 60%;
+    
+    .blog-image {
+      width: 40%;
+      height: 100%;
+      flex-shrink: 0;
+    }
+    
+    .blog-content {
+      padding: 1.5rem;
+      width: 60%;
+    }
   }
 }
 
-/* MODULARIZATION: responsive/_desktop.scss */
-/* Product Content Desktop Styles */
+
+/* ============ PRODUCT CONTENT ============ */
+.product-article {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  border: none;
+  
+  /* Consistent spacing for all direct children */
+  & > * {
+    margin: 0;
+    padding: 0;
+  }
+}
+
+.product-hero {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  margin-bottom: 3rem;
+  
+  @media (min-width: 1024px) {
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 3rem;
+  }
+  
+  /* Ensure images maintain aspect ratio */
+  img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: var(--radius);
+  }
+}
+
+.product-hero-image {
+  width: 100%;
+  height: 400px;
+  border-radius: var(--radius);
+  overflow: hidden;
+  position: relative;
+  
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s var(--ease);
+  }
+  
+  &[data-zoomable]:hover img {
+    transform: scale(1.05);
+  }
+}
+
+.product-header-content {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  
+  @media (min-width: 768px) {
+    padding: 2rem;
+  }
+  
+  @media (min-width: 1024px) {
+    padding: 0;
+    gap: 2rem;
+  }
+  
+  /* Consistent typography hierarchy */
+  h1, h2, h3 {
+    margin: 0;
+    line-height: 1.2;
+  }
+}
+
+.product-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.product-category {
+  background: var(--gradient);
+  color: white;
+  padding: 0.5rem 1.25rem;
+  border-radius: 2rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.product-price {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.original-price {
+  text-decoration: line-through;
+  opacity: 0.7;
+  font-size: 1rem;
+}
+
+.current-price {
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+
+.product-title {
+  font-size: clamp(1.8rem, 5vw, 2.5rem);
+  font-variation-settings: 'wght' 700;
+  line-height: 1.2;
+  margin: 0;
+  background: var(--gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.product-description {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  opacity: 0.9;
+}
+
+.product-features {
+  margin: 2rem 0;
+  
+  h3 {
+    font-size: 1.25rem;
+    margin-bottom: 1.5rem;
+    font-variation-settings: 'wght' 600;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    
+    &::before {
+      content: '';
+      display: block;
+      width: 1.5rem;
+      height: 2px;
+      background: var(--gradient);
+    }
+  }
+  
+  ul {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    gap: 1rem;
+    
+    @media (min-width: 768px) {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  
+  .feature-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding: 0.5rem 0;
+    
+    .feature-icon {
+      color: #28F29C;
+      font-size: 1rem;
+      margin-top: 0.2rem;
+    }
+    
+    span:last-child {
+      font-size: 1rem;
+      line-height: 1.5;
+    }
+  }
+}
+
+.product-features ul {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  gap: 0.75rem;
+}
+
+.feature-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 0.5rem 0;
+  
+  span:last-child {
+    flex: 1;
+  }
+}
+
+.feature-icon {
+  font-size: 0.9rem;
+  flex-shrink: 0;
+  margin-top: 0.2rem;
+}
+
+.product-actions {
+  display: flex;
+  gap: 1rem;
+  margin: 2rem 0;
+  
+  @media (max-width: 640px) {
+    flex-direction: column;
+  }
+  
+  /* Consistent button styles */
+  .btn-primary, .btn-secondary {
+    flex: 1;
+    padding: 1rem;
+    border-radius: var(--radius);
+    font-weight: 600;
+    text-align: center;
+    transition: all 0.3s var(--ease);
+    
+    &:hover {
+      transform: translateY(-2px);
+    }
+  }
+  
+  .btn-primary {
+    background: var(--gradient);
+    color: white;
+    border: none;
+    
+    &:hover {
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    }
+  }
+  
+  .btn-secondary {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--fg);
+    border: 1px solid var(--border-color);
+    
+    &:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+  }
+}
+
+.btn-primary {
+  background: var(--gradient);
+  color: white;
+  padding: 1rem 2rem;
+  border-radius: var(--radius);
+  font-weight: 600;
+  text-align: center;
+  flex: 1;
+  transition: all 0.3s var(--ease);
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  }
+  
+  &.pulse-on-hover:hover {
+    animation: pulse 1.5s infinite;
+  }
+}
+
+.btn-secondary {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--fg);
+  border: 1px solid var(--border-color);
+  padding: 1rem 2rem;
+  border-radius: var(--radius);
+  font-weight: 600;
+  text-align: center;
+  flex: 1;
+  transition: all 0.3s var(--ease);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  &:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+  }
+}
+
+.product-guarantee {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.9rem;
+  opacity: 0.9;
+  padding: 0.75rem;
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.product-content {
+  padding: 2rem;
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  margin-top: 2rem;
+  
+  .prose {
+    max-width: 100%;
+    color: var(--fg);
+    line-height: 1.7;
+    
+    h2, h3, h4 {
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+      font-variation-settings: 'wght' 600;
+    }
+    
+    h2 {
+      font-size: 1.75rem;
+      border-bottom: 2px solid var(--border-color);
+      padding-bottom: 0.5rem;
+    }
+    
+    h3 {
+      font-size: 1.5rem;
+    }
+    
+    p {
+      margin-bottom: 1.5rem;
+      font-size: 1.1rem;
+    }
+    
+    ul, ol {
+      padding-left: 1.5rem;
+      margin-bottom: 1.5rem;
+      
+      li {
+        margin-bottom: 0.5rem;
+        position: relative;
+        
+        &::marker {
+          color: #28F29C;
+        }
+      }
+    }
+    
+    img {
+      max-width: 100%;
+      height: auto;
+      border-radius: var(--radius);
+      margin: 1.5rem 0;
+    }
+  }
+  
+  @media (min-width: 768px) {
+    padding: 3rem;
+  }
+}
+
+/* Course Modules */
+.course-modules {
+  margin-top: 3rem;
+}
+
+.module-title {
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+}
+
+.modules-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1rem;
+}
+
+.module-card {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s var(--ease);
+  
+  &:hover {
+    transform: translateY(-5px);
+  }
+}
+
+.module-number {
+  width: 2.5rem;
+  height: 2.5rem;
+  background: var(--gradient);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+/* Final CTA */
+.product-cta {
+  padding: 3rem 2rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  
+  h2 {
+    font-size: 1.8rem;
+    margin: 0;
+  }
+  
+  .btn-primary {
+    max-width: 300px;
+  }
+}
+
+/* Animations */
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+.pulse {
+  animation: pulse 2s infinite;
+}
+
+/* Dark mode adjustments */
+.dark-mode {
+  .btn-secondary {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: var(--border-color);
+    
+    &:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+  }
+  
+  .product-description {
+    opacity: 0.85;
+  }
+  
+  .product-guarantee {
+    background: rgba(255, 255, 255, 0.05);
+  }
+}
+
+/* Shop Item Desktop Styles */
 @media (min-width: 1024px) {
   .product-article {
     padding: 3rem var(--desktop-side-padding);
@@ -2398,7 +2207,7 @@ textarea:focus {
     align-items: center;
   }
 
-  .product-hero__image-wrapper {
+  .product-hero-image {
     height: 500px;
   }
 
@@ -2410,36 +2219,35 @@ textarea:focus {
     grid-template-columns: 1fr 1fr;
   }
 
-  .course-modules__container {
+  .modules-container {
     grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
   }
 
   .module-card {
     padding: 2rem;
-  }
-
-  .module-card h3 {
-    font-size: 1.25rem;
+    
+    h3 {
+      font-size: 1.25rem;
+    }
   }
 }
 
-/* MODULARIZATION: responsive/_desktop.scss */
 @media (min-width: 1024px) {
   .prose {
     font-size: 1.1rem;
     line-height: 1.8;
-  }
-
-  .prose h1 {
-    font-size: 2.5rem;
-  }
-
-  .prose h2 {
-    font-size: 2rem;
-  }
-
-  .prose p {
-    margin-bottom: 2rem;
+    
+    h1 {
+      font-size: 2.5rem;
+    }
+    
+    h2 {
+      font-size: 2rem;
+    }
+    
+    p {
+      margin-bottom: 2rem;
+    }
   }
 
   .product-title {
@@ -2451,8 +2259,13 @@ textarea:focus {
   }
 }
 
-/* MODULARIZATION: layouts/_app-content.scss */
-/* Global Container Overrides for larger screens */
+/* ============ RESPONSIVE BREAKPOINTS ============ */
+/* Tablet: 768px - 1023px */
+/* Desktop: 1024px+ */
+/* Large Desktop: 1440px+ */
+
+/* ============ GLOBAL CONTAINER OVERRIDES ============ */
+/* Override the global app-content container for larger screens */
 @media (min-width: 768px) {
   .app-content {
     max-width: 768px;
@@ -2474,8 +2287,7 @@ textarea:focus {
   }
 }
 
-/* MODULARIZATION: responsive/_tablet.scss */
-/* Tablet Styles (768px - 1023px) */
+/* ============ TABLET STYLES (768px - 1023px) ============ */
 @media (min-width: 768px) and (max-width: 1023px) {
   .post-article {
     max-width: 100%;
@@ -2487,7 +2299,7 @@ textarea:focus {
     margin-bottom: 3rem;
   }
 
-  .post-hero__image-wrapper {
+  .post-hero-image {
     height: 350px;
   }
 
@@ -2506,43 +2318,44 @@ textarea:focus {
 
   .post-content {
     padding: 2.5rem;
-  }
-
-  .post-content .prose {
-    font-size: 1.05rem;
-    line-height: 1.75;
-  }
-
-  .post-content .prose h1 {
-    font-size: 2.25rem;
-  }
-
-  .post-content .prose h2 {
-    font-size: 1.875rem;
-  }
-
-  .post-content .prose h3 {
-    font-size: 1.5rem;
-  }
-
-  .post-content .prose p {
-    margin-bottom: 1.75rem;
-  }
-
-  .post-content .prose blockquote {
-    margin: 2.5rem 0;
-    padding: 2rem;
-    font-size: 1.15rem;
-  }
-
-  .post-content .prose pre {
-    padding: 2rem;
-    font-size: 0.9rem;
-  }
-
-  .post-content .prose table th,
-  .post-content .prose table td {
-    padding: 1rem 0.75rem;
+    
+    .prose {
+      font-size: 1.05rem;
+      line-height: 1.75;
+      
+      h1 {
+        font-size: 2.25rem;
+      }
+      
+      h2 {
+        font-size: 1.875rem;
+      }
+      
+      h3 {
+        font-size: 1.5rem;
+      }
+      
+      p {
+        margin-bottom: 1.75rem;
+      }
+      
+      blockquote {
+        margin: 2.5rem 0;
+        padding: 2rem;
+        font-size: 1.15rem;
+      }
+      
+      pre {
+        padding: 2rem;
+        font-size: 0.9rem;
+      }
+      
+      table {
+        th, td {
+          padding: 1rem 0.75rem;
+        }
+      }
+    }
   }
 
   /* Product Page Tablet Styles */
@@ -2557,7 +2370,7 @@ textarea:focus {
     gap: 2rem;
   }
 
-  .product-hero__image-wrapper {
+  .product-hero-image {
     height: 350px;
   }
 
@@ -2578,7 +2391,7 @@ textarea:focus {
     gap: 1rem;
   }
 
-  .course-modules__container {
+  .modules-container {
     grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
     gap: 1.5rem;
   }
@@ -2599,8 +2412,7 @@ textarea:focus {
   }
 }
 
-/* MODULARIZATION: responsive/_desktop.scss */
-/* Desktop Styles (1024px+) */
+/* ============ DESKTOP STYLES (1024px+) ============ */
 @media (min-width: 1024px) {
   .post-article {
     max-width: 100%;
@@ -2612,7 +2424,7 @@ textarea:focus {
     margin-bottom: 4rem;
   }
 
-  .post-hero__image-wrapper {
+  .post-hero-image {
     height: 500px;
   }
 
@@ -2632,90 +2444,87 @@ textarea:focus {
 
   .post-content {
     padding: 4rem;
-  }
-
-  .post-content .prose {
-    max-width: 800px;
-    margin: 0 auto;
-    font-size: 1.125rem;
-    line-height: 1.8;
-  }
-
-  .post-content .prose h1 {
-    font-size: 2.75rem;
-    margin-top: 3rem;
-  }
-
-  .post-content .prose h2 {
-    font-size: 2.25rem;
-    margin-top: 2.5rem;
-  }
-
-  .post-content .prose h3 {
-    font-size: 1.875rem;
-    margin-top: 2rem;
-  }
-
-  .post-content .prose h4 {
-    font-size: 1.5rem;
-  }
-
-  .post-content .prose p {
-    margin-bottom: 2rem;
-  }
-
-  .post-content .prose blockquote {
-    margin: 3rem 0;
-    padding: 2.5rem;
-    font-size: 1.2rem;
-  }
-
-  .post-content .prose blockquote::before {
-    font-size: 4rem;
-    top: -1rem;
-    left: 1.5rem;
-  }
-
-  .post-content .prose pre {
-    padding: 2.5rem;
-    font-size: 0.95rem;
-    margin: 2rem 0;
-  }
-
-  .post-content .prose img {
-    margin: 3rem 0;
-    max-width: 110%;
-    margin-left: -5%;
-    border-radius: 12px;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s var(--ease);
-  }
-
-  .post-content .prose img:hover {
-    transform: scale(1.02);
-  }
-
-  .post-content .prose table {
-    margin: 2.5rem 0;
-  }
-
-  .post-content .prose table th,
-  .post-content .prose table td {
-    padding: 1.25rem 1rem;
-  }
-
-  .post-content .prose table th {
-    font-size: 0.95rem;
-  }
-
-  .post-content .prose ul,
-  .post-content .prose ol {
-    margin-bottom: 2rem;
-  }
-
-  .post-content .prose ul li,
-  .post-content .prose ol li {
-    margin-bottom: 0.75rem;
+    
+    .prose {
+      max-width: 800px;
+      margin: 0 auto;
+      font-size: 1.125rem;
+      line-height: 1.8;
+      
+      h1 {
+        font-size: 2.75rem;
+        margin-top: 3rem;
+      }
+      
+      h2 {
+        font-size: 2.25rem;
+        margin-top: 2.5rem;
+      }
+      
+      h3 {
+        font-size: 1.875rem;
+        margin-top: 2rem;
+      }
+      
+      h4 {
+        font-size: 1.5rem;
+      }
+      
+      p {
+        margin-bottom: 2rem;
+      }
+      
+      blockquote {
+        margin: 3rem 0;
+        padding: 2.5rem;
+        font-size: 1.2rem;
+        
+        &::before {
+          font-size: 4rem;
+          top: -1rem;
+          left: 1.5rem;
+        }
+      }
+      
+      pre {
+        padding: 2.5rem;
+        font-size: 0.95rem;
+        margin: 2rem 0;
+      }
+      
+      img {
+        margin: 3rem 0;
+        max-width: 110%;
+        margin-left: -5%;
+        border-radius: 12px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s var(--ease);
+        
+        &:hover {
+          transform: scale(1.02);
+        }
+      }
+      
+      table {
+        margin: 2.5rem 0;
+        
+        th, td {
+          padding: 1.25rem 1rem;
+        }
+        
+        th {
+          font-size: 0.95rem;
+        }
+      }
+      
+      ul, ol {
+        margin-bottom: 2rem;
+        
+        li {
+          margin-bottom: 0.75rem;
+        }
+      }
+    }
   }
 
   /* Desktop Product Page Styles */
@@ -2732,7 +2541,7 @@ textarea:focus {
     align-items: center;
   }
 
-  .product-hero__image-wrapper {
+  .product-hero-image {
     height: 600px;
     order: 1;
   }
@@ -2753,24 +2562,24 @@ textarea:focus {
 
   .product-features {
     margin: 2rem 0;
+    
+    h3 {
+      font-size: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+    
+    ul {
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+    }
   }
 
-  .product-features h3 {
-    font-size: 1.5rem;
-    margin-bottom: 1.5rem;
-  }
-
-  .product-features ul {
-    grid-template-columns: 1fr 1fr;
-    gap: 1.25rem;
-  }
-
-  .product-features__item {
+  .feature-item {
     padding: 0.75rem 0;
-  }
-
-  .product-features__item span:last-child {
-    font-size: 1.05rem;
+    
+    span:last-child {
+      font-size: 1.05rem;
+    }
   }
 
   .product-actions {
@@ -2792,44 +2601,43 @@ textarea:focus {
 
   .product-content {
     padding: 3rem;
+    
+    .prose {
+      max-width: 100%;
+      font-size: 1.125rem;
+      line-height: 1.8;
+      
+      h2, h3 {
+        margin-top: 2.5rem;
+      }
+      
+      h2 {
+        font-size: 2rem;
+      }
+      
+      h3 {
+        font-size: 1.5rem;
+      }
+    }
   }
 
-  .product-content .prose {
-    max-width: 100%;
-    font-size: 1.125rem;
-    line-height: 1.8;
-  }
-
-  .product-content .prose h2,
-  .product-content .prose h3 {
-    margin-top: 2.5rem;
-  }
-
-  .product-content .prose h2 {
-    font-size: 2rem;
-  }
-
-  .product-content .prose h3 {
-    font-size: 1.5rem;
-  }
-
-  .course-modules__container {
+  .modules-container {
     grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
     gap: 2rem;
   }
 
   .module-card {
     padding: 2.5rem;
-  }
-
-  .module-card h3 {
-    font-size: 1.375rem;
-    margin-bottom: 1rem;
-  }
-
-  .module-card p {
-    font-size: 1.05rem;
-    line-height: 1.6;
+    
+    h3 {
+      font-size: 1.375rem;
+      margin-bottom: 1rem;
+    }
+    
+    p {
+      font-size: 1.05rem;
+      line-height: 1.6;
+    }
   }
 
   .module-number {
@@ -2841,33 +2649,32 @@ textarea:focus {
 
   .product-cta {
     padding: 4rem 3rem;
-  }
-
-  .product-cta h2 {
-    font-size: 2.25rem;
-    margin-bottom: 1rem;
-  }
-
-  .product-cta p {
-    font-size: 1.125rem;
-    max-width: 600px;
-  }
-
-  .product-cta .btn-primary {
-    max-width: 350px;
-    padding: 1.5rem 3rem;
+    
+    h2 {
+      font-size: 2.25rem;
+      margin-bottom: 1rem;
+    }
+    
+    p {
+      font-size: 1.125rem;
+      max-width: 600px;
+    }
+    
+    .btn-primary {
+      max-width: 350px;
+      padding: 1.5rem 3rem;
+    }
   }
 }
 
-/* MODULARIZATION: responsive/_large-desktop.scss */
-/* Large Desktop Styles (1440px+) */
+/* ============ LARGE DESKTOP STYLES (1440px+) ============ */
 @media (min-width: 1440px) {
   .post-article {
     max-width: 1400px;
     padding: 4rem 3rem;
   }
 
-  .post-hero__image-wrapper {
+  .post-hero-image {
     height: 550px;
   }
 
@@ -2877,45 +2684,46 @@ textarea:focus {
 
   .post-content {
     padding: 5rem;
-  }
-
-  .post-content .prose {
-    max-width: 900px;
-    font-size: 1.2rem;
-  }
-
-  .post-content .prose h1 {
-    font-size: 3.25rem;
-  }
-
-  .post-content .prose h2 {
-    font-size: 2.5rem;
-  }
-
-  .post-content .prose h3 {
-    font-size: 2rem;
-  }
-
-  .post-content .prose blockquote {
-    padding: 3rem;
-    font-size: 1.3rem;
-  }
-
-  .post-content .prose blockquote::before {
-    font-size: 5rem;
-    top: -1.5rem;
-    left: 2rem;
-  }
-
-  .post-content .prose pre {
-    padding: 3rem;
-    font-size: 1rem;
-  }
-
-  .post-content .prose img {
-    max-width: 120%;
-    margin-left: -10%;
-    margin: 4rem 0;
+    
+    .prose {
+      max-width: 900px;
+      font-size: 1.2rem;
+      
+      h1 {
+        font-size: 3.25rem;
+      }
+      
+      h2 {
+        font-size: 2.5rem;
+      }
+      
+      h3 {
+        font-size: 2rem;
+      }
+      
+      blockquote {
+        padding: 3rem;
+        font-size: 1.3rem;
+        
+        &::before {
+          font-size: 5rem;
+          top: -1.5rem;
+          left: 2rem;
+        }
+      }
+      
+      pre {
+        padding: 3rem;
+        font-size: 1rem;
+      }
+      
+      img {
+        max-width: 120%;
+        margin-left: -10%;
+        margin: 4rem 0;
+        margin-left: -10%;
+      }
+    }
   }
 
   /* Large Desktop Product Styles */
@@ -2928,7 +2736,7 @@ textarea:focus {
     gap: 5rem;
   }
 
-  .product-hero__image-wrapper {
+  .product-hero-image {
     height: 650px;
   }
 
@@ -2945,7 +2753,7 @@ textarea:focus {
     gap: 1.5rem;
   }
 
-  .course-modules__container {
+  .modules-container {
     grid-template-columns: repeat(auto-fill, minmax(420px, 1fr));
     gap: 2.5rem;
   }
@@ -2956,475 +2764,88 @@ textarea:focus {
 
   .product-content {
     padding: 4rem;
-  }
-
-  .product-content .prose {
-    font-size: 1.2rem;
-  }
-}
-
-/* MODULARIZATION: responsive/_desktop.scss */
-/* Blog Article Page Desktop Responsive */
-@media (min-width: 768px) {
-  .post-article {
-    max-width: 1000px;
-    padding: 3rem 2rem;
+    
+    .prose {
+      font-size: 1.2rem;
+    }
   }
 }
 
-@media (min-width: 1024px) {
-  .post-article {
-    max-width: 1200px;
-    padding: 4rem 3rem;
-  }
-}
-
-@media (min-width: 768px) {
-  .post-hero {
-    margin-bottom: 4rem;
-  }
-
-  .post-hero__image-wrapper {
-    height: 500px;
-  }
-
-  .post-header-content {
-    padding: 3rem 3rem 2rem;
-  }
-
-  .post-title {
-    font-size: clamp(2.5rem, 5vw, 4rem);
-    margin-bottom: 1.5rem;
-  }
-
-  .post-meta {
-    flex-direction: row;
-    gap: 2rem;
-    margin-bottom: 1.5rem;
-  }
-
-  .post-categories-overlay {
-    margin-top: 1.5rem;
-  }
-
-  .post-category-badge {
-    padding: 0.5rem 1rem;
-    font-size: 0.875rem;
-  }
-}
-
-@media (min-width: 1024px) {
-  .post-hero__image-wrapper {
-    height: 600px;
-  }
-
-  .post-header-content {
-    padding: 4rem 4rem 3rem;
-  }
-}
-
-@media (min-width: 768px) {
-  .post-content {
-    padding: 4rem 3rem;
-    margin-top: 3rem;
-  }
-
-  .post-content .prose {
-    font-size: 1.125rem;
-    line-height: 1.8;
-  }
-
-  .post-content .prose h1 {
-    font-size: 2.5rem;
-    margin-top: 3rem;
-    margin-bottom: 1.5rem;
-  }
-
-  .post-content .prose h2 {
-    font-size: 2rem;
-    margin-top: 2.5rem;
-    margin-bottom: 1.25rem;
-  }
-
-  .post-content .prose h3 {
-    font-size: 1.75rem;
-    margin-top: 2rem;
-    margin-bottom: 1rem;
-  }
-
-  .post-content .prose h4 {
-    font-size: 1.5rem;
-    margin-top: 1.75rem;
-    margin-bottom: 0.75rem;
-  }
-
-  .post-content .prose p {
-    margin-bottom: 1.75rem;
-  }
-
-  .post-content .prose ul,
-  .post-content .prose ol {
-    margin-bottom: 1.75rem;
-    padding-left: 2rem;
-  }
-
-  .post-content .prose blockquote {
-    margin: 3rem 0;
-    padding: 2rem;
-    font-size: 1.25rem;
-  }
-
-  .post-content .prose pre {
-    padding: 2rem;
-    margin: 2rem 0;
-    font-size: 0.9rem;
-  }
-
-  .post-content .prose table {
-    margin: 2rem 0;
-  }
-
-  .post-content .prose table th,
-  .post-content .prose table td {
-    padding: 1.25rem;
-  }
-
-  .post-content .prose img {
-    margin: 2rem 0;
-  }
-}
-
-@media (min-width: 1024px) {
-  .post-content {
-    padding: 5rem 4rem;
-  }
-
-  .post-content .prose {
-    font-size: 1.1875rem;
-  }
-
-  .post-content .prose h1 {
-    font-size: 3rem;
-  }
-
-  .post-content .prose h2 {
-    font-size: 2.25rem;
-  }
-
-  .post-content .prose h3 {
-    font-size: 1.875rem;
-  }
-
-  .post-content .prose blockquote {
-    font-size: 1.375rem;
-    padding: 2.5rem;
-  }
-}
-
-/* MODULARIZATION: responsive/_desktop.scss */
-/* Shop Item Detail Page Desktop Responsive */
-@media (min-width: 768px) {
-  .modal-container {
-    max-width: 900px;
-    max-height: 90vh;
-    margin: 2rem auto;
-  }
-
-  .modal-content {
-    padding: 2rem;
-  }
-
-  .shop-item-layout {
-    grid-template-columns: 1fr 1fr;
-    gap: 3rem;
-  }
-
-  .shop-item-image {
-    width: 100%;
-    height: 500px;
-  }
-
-  .shop-item-details {
-    gap: 1.5rem;
-  }
-
-  .shop-item-title {
-    font-size: 2rem;
-  }
-
-  .shop-item-price {
-    font-size: 1.5rem;
-  }
-
-  .shop-item-description {
-    font-size: 1.125rem;
-  }
-
-  .shop-item-actions {
-    margin-top: 1rem;
-  }
-
-  .shop-item-buy-btn {
-    padding: 1rem 2rem;
-    font-size: 1.125rem;
-  }
-
-  .shop-item-features {
-    margin-top: 2rem;
-  }
-
-  .shop-item-features h3 {
-    font-size: 1.25rem;
-    margin-bottom: 1rem;
-  }
-
-  .shop-item-features li {
-    padding: 0.5rem 0;
-    font-size: 1rem;
-  }
-}
-
-@media (min-width: 1024px) {
-  .modal-container {
-    max-width: 1200px;
-  }
-
-  .modal-content {
-    padding: 3rem;
-  }
-
-  .shop-item-layout {
-    gap: 4rem;
-  }
-
-  .shop-item-image {
-    height: 600px;
-  }
-
-  .shop-item-title {
-    font-size: 2.5rem;
-  }
-
-  .shop-item-price {
-    font-size: 1.75rem;
-  }
-
-  .shop-item-description {
-    font-size: 1.1875rem;
-  }
-}
-
-/* MODULARIZATION: responsive/_desktop.scss */
-/* Blog Item Modal - Desktop */
-@media (min-width: 768px) {
-  .blog-modal-container {
-    max-width: 1000px;
-    margin: 2rem auto;
-  }
-
-  .blog-modal-content {
-    padding: 2rem;
-  }
-
-  .blog-modal-image {
-    width: 100%;
-    height: 400px;
-    margin-bottom: 2rem;
-  }
-
-  .blog-modal-title {
-    font-size: 2.25rem;
-    margin-bottom: 1.5rem;
-  }
-
-  .blog-modal-meta {
-    margin-bottom: 2rem;
-    font-size: 1rem;
-  }
-
-  .blog-modal-excerpt {
-    font-size: 1.125rem;
-    margin-bottom: 2rem;
-  }
-
-  .blog-modal-content-text {
-    font-size: 1.125rem;
-  }
-}
-
-@media (min-width: 1024px) {
-  .blog-modal-container {
-    max-width: 1200px;
-  }
-
-  .blog-modal-content {
-    padding: 3rem;
-  }
-
-  .blog-modal-image {
-    height: 500px;
-  }
-
-  .blog-modal-title {
-    font-size: 2.75rem;
-  }
-
-  .blog-modal-excerpt {
-    font-size: 1.1875rem;
-  }
-
-  .blog-modal-content-text {
-    font-size: 1.1875rem;
-  }
-}
-
-/* MODULARIZATION: responsive/_desktop.scss */
-/* Modal Close Button - Desktop */
-@media (min-width: 768px) {
-  .modal-close-btn {
-    width: 3rem;
-    height: 3rem;
-    font-size: 1.5rem;
-    top: 1rem;
-    right: 1rem;
-  }
-}
-
-/* MODULARIZATION: responsive/_desktop.scss */
-/* Enhanced Interactions for Larger Screens */
+/* ============ ENHANCED INTERACTIONS FOR LARGER SCREENS ============ */
 @media (min-width: 1024px) {
   /* Smooth hover effects */
-  .post-hero__image {
+  .post-hero-image img {
     &:hover {
       transform: scale(1.03);
     }
   }
 
-  .product-hero__image-wrapper[data-zoomable] {
-    cursor: zoom-in;
-  }
-
-  .product-hero__image-wrapper[data-zoomable]:hover .product-hero__image {
-    transform: scale(1.08);
+  .product-hero-image {
+    &[data-zoomable] {
+      cursor: zoom-in;
+      
+      &:hover img {
+        transform: scale(1.08);
+      }
+    }
   }
 
   /* Enhanced button interactions */
   .btn-primary {
     position: relative;
     overflow: hidden;
-  }
-
-  .btn-primary::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-    transition: left 0.5s;
-  }
-
-  .btn-primary:hover::before {
-    left: 100%;
+    
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: left 0.5s;
+    }
+    
+    &:hover::before {
+      left: 100%;
+    }
   }
 
   /* Table hover effects */
-  .prose table tr {
-    transition: all 0.2s ease;
-  }
-
-  .prose table tr:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  .prose table {
+    tr {
+      transition: all 0.2s ease;
+      
+      &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      }
+    }
   }
 
   /* Module card enhanced hover */
   .module-card {
     transition: all 0.3s var(--ease);
-  }
-
-  .module-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+    
+    &:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+    }
   }
 
   /* Category hover effects */
-  .post-category-badge,
-  .product-meta__category {
+  .post-category,
+  .product-category {
     transition: all 0.3s var(--ease);
-  }
-
-  .post-category-badge:hover,
-  .product-meta__category:hover {
-    transform: translateY(-3px) scale(1.05);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-  }
-}
-
-/* ========================================================================== *
- * # ACCESSIBILITY
- * ========================================================================== */
-
-/* MODULARIZATION: responsive/_accessibility.scss */
-/*
- * Reduced Motion Preference
- * Disables animations and transitions for users who prefer reduced motion.
- */
-@media (prefers-reduced-motion) {
-  .shop-card,
-  .blog-card,
-  .modal-container {
-    transition: none;
-  }
-
-  .shop-card__image,
-  .blog-card__image {
-    transition: none;
-  }
-
-  .post-hero__image,
-  .product-hero__image,
-  .module-card,
-  .btn-primary,
-  .btn-secondary {
-    transition: none;
-  }
-
-  .btn-primary::before {
-    display: none;
+    
+    &:hover {
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    }
   }
 }
 
-/* MODULARIZATION: responsive/_accessibility.scss */
-/*
- * High Contrast Mode Support
- * Adjusts styles for users who prefer high contrast.
- */
-@media (prefers-contrast: high) {
-  .post-category-badge,
-  .product-meta__category {
-    border: 2px solid currentColor;
-  }
-
-  .btn-primary,
-  .btn-secondary {
-    border: 2px solid currentColor;
-  }
-
-  .prose blockquote {
-    border-left-width: 6px;
-  }
-}
-
-/* ========================================================================== *
- * # PRINT STYLES
- * ========================================================================== */
-
-/* MODULARIZATION: responsive/_print.scss */
-/*
- * Print-specific adjustments for optimal printing of articles and products.
- */
+/* ============ PRINT STYLES ============ */
 @media print {
   .post-article,
   .product-article {
@@ -3439,8 +2860,8 @@ textarea:focus {
     page-break-inside: avoid;
   }
 
-  .post-hero__image-wrapper,
-  .product-hero__image-wrapper {
+  .post-hero-image,
+  .product-hero-image {
     height: auto;
     max-height: 300px;
   }
@@ -3468,4 +2889,407 @@ textarea:focus {
   }
 }
 
+/* ============ ACCESSIBILITY ENHANCEMENTS ============ */
+@media (prefers-reduced-motion: reduce) {
+  .post-hero-image img,
+  .product-hero-image img,
+  .module-card,
+  .btn-primary,
+  .btn-secondary {
+    transition: none;
+  }
 
+  .btn-primary::before {
+    display: none;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .post-category,
+  .product-category {
+    border: 2px solid currentColor;
+  }
+
+  .btn-primary,
+  .btn-secondary {
+    border: 2px solid currentColor;
+  }
+
+  .prose blockquote {
+    border-left-width: 6px;
+  }
+}
+
+/* ============ BLOG ARTICLE PAGE DESKTOP RESPONSIVE ============ */
+
+/* Post Article Container - Desktop */
+@media (min-width: 768px) {
+  .post-article {
+    max-width: 1000px;
+    padding: 3rem 2rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .post-article {
+    max-width: 1200px;
+    padding: 4rem 3rem;
+  }
+}
+
+/* Post Hero Section - Desktop */
+@media (min-width: 768px) {
+  .post-hero {
+    margin-bottom: 4rem;
+  }
+  
+  .post-hero-image {
+    height: 500px;
+  }
+  
+  .post-header-content {
+    padding: 3rem 3rem 2rem;
+  }
+  
+  .post-title {
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    margin-bottom: 1.5rem;
+  }
+  
+  .post-meta {
+    flex-direction: row;
+    gap: 2rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .post-categories {
+    margin-top: 1.5rem;
+  }
+  
+  .post-category {
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .post-hero-image {
+    height: 600px;
+  }
+  
+  .post-header-content {
+    padding: 4rem 4rem 3rem;
+  }
+}
+
+/* Post Content - Desktop */
+@media (min-width: 768px) {
+  .post-content {
+    padding: 4rem 3rem;
+    margin-top: 3rem;
+  }
+  
+  .post-content .prose {
+    font-size: 1.125rem;
+    line-height: 1.8;
+    
+    h1 {
+      font-size: 2.5rem;
+      margin-top: 3rem;
+      margin-bottom: 1.5rem;
+    }
+    
+    h2 {
+      font-size: 2rem;
+      margin-top: 2.5rem;
+      margin-bottom: 1.25rem;
+    }
+    
+    h3 {
+      font-size: 1.75rem;
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+    }
+    
+    h4 {
+      font-size: 1.5rem;
+      margin-top: 1.75rem;
+      margin-bottom: 0.75rem;
+    }
+    
+    p {
+      margin-bottom: 1.75rem;
+    }
+    
+    ul, ol {
+      margin-bottom: 1.75rem;
+      padding-left: 2rem;
+    }
+    
+    blockquote {
+      margin: 3rem 0;
+      padding: 2rem;
+      font-size: 1.25rem;
+    }
+    
+    pre {
+      padding: 2rem;
+      margin: 2rem 0;
+      font-size: 0.9rem;
+    }
+    
+    table {
+      margin: 2rem 0;
+      
+      th, td {
+        padding: 1.25rem;
+      }
+    }
+    
+    img {
+      margin: 2rem 0;
+    }
+  }
+}
+
+@media (min-width: 1024px) {
+  .post-content {
+    padding: 5rem 4rem;
+  }
+  
+  .post-content .prose {
+    font-size: 1.1875rem;
+    
+    h1 {
+      font-size: 3rem;
+    }
+    
+    h2 {
+      font-size: 2.25rem;
+    }
+    
+    h3 {
+      font-size: 1.875rem;
+    }
+    
+    blockquote {
+      font-size: 1.375rem;
+      padding: 2.5rem;
+    }
+  }
+}
+
+/* ============ SHOP ITEM DETAIL PAGE DESKTOP RESPONSIVE ============ */
+
+/* Shop Item Modal - Desktop */
+@media (min-width: 768px) {
+  .modal-container {
+    max-width: 900px;
+    max-height: 90vh;
+    margin: 2rem auto;
+  }
+  
+  .modal-content {
+    padding: 2rem;
+  }
+  
+  /* Shop Item Layout - Desktop */
+  .shop-item-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: start;
+  }
+  
+  .shop-item-image {
+    width: 100%;
+    height: 500px;
+    object-fit: cover;
+    border-radius: var(--radius);
+  }
+  
+  .shop-item-details {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  
+  .shop-item-title {
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 1.2;
+  }
+  
+  .shop-item-price {
+    font-size: 1.5rem;
+    font-weight: 600;
+  }
+  
+  .shop-item-description {
+    font-size: 1.125rem;
+    line-height: 1.6;
+  }
+  
+  .shop-item-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+  
+  .shop-item-buy-btn {
+    flex: 1;
+    padding: 1rem 2rem;
+    font-size: 1.125rem;
+    font-weight: 600;
+    border-radius: var(--radius);
+  }
+  
+  .shop-item-features {
+    margin-top: 2rem;
+  }
+  
+  .shop-item-features h3 {
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+  }
+  
+  .shop-item-features ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .shop-item-features li {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--border-color);
+    font-size: 1rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .modal-container {
+    max-width: 1200px;
+  }
+  
+  .modal-content {
+    padding: 3rem;
+  }
+  
+  .shop-item-layout {
+    gap: 4rem;
+  }
+  
+  .shop-item-image {
+    height: 600px;
+  }
+  
+  .shop-item-title {
+    font-size: 2.5rem;
+  }
+  
+  .shop-item-price {
+    font-size: 1.75rem;
+  }
+  
+  .shop-item-description {
+    font-size: 1.1875rem;
+  }
+}
+
+/* Blog Item Modal - Desktop */
+@media (min-width: 768px) {
+  .blog-modal-container {
+    max-width: 1000px;
+    margin: 2rem auto;
+  }
+  
+  .blog-modal-content {
+    padding: 2rem;
+  }
+  
+  .blog-modal-image {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    border-radius: var(--radius);
+    margin-bottom: 2rem;
+  }
+  
+  .blog-modal-title {
+    font-size: 2.25rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+  }
+  
+  .blog-modal-meta {
+    margin-bottom: 2rem;
+    font-size: 1rem;
+  }
+  
+  .blog-modal-excerpt {
+    font-size: 1.125rem;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+  }
+  
+  .blog-modal-content-text {
+    font-size: 1.125rem;
+    line-height: 1.7;
+  }
+}
+
+@media (min-width: 1024px) {
+  .blog-modal-container {
+    max-width: 1200px;
+  }
+  
+  .blog-modal-content {
+    padding: 3rem;
+  }
+  
+  .blog-modal-image {
+    height: 500px;
+  }
+  
+  .blog-modal-title {
+    font-size: 2.75rem;
+  }
+  
+  .blog-modal-excerpt {
+    font-size: 1.1875rem;
+  }
+  
+  .blog-modal-content-text {
+    font-size: 1.1875rem;
+  }
+}
+
+/* Modal Close Button - Desktop */
+@media (min-width: 768px) {
+  .modal-close-btn {
+    width: 3rem;
+    height: 3rem;
+    font-size: 1.5rem;
+    top: 1rem;
+    right: 1rem;
+  }
+}
+
+/* Modal Actions - Desktop */
+@media (min-width: 768px) {
+  .modal-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-end;
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border-color);
+  }
+  
+  .modal-actions button {
+    padding: 0.75rem 2rem;
+    font-size: 1rem;
+    min-width: 120px;
+  }
+}
