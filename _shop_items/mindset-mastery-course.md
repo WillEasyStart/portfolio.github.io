@@ -6,7 +6,7 @@ description: "Transform your thinking with our comprehensive mindset training pr
 category: "Mindset"
 price: "$97"
 original_price: "$197"
-image: "https://images.unsplash.com/photo-1505373877841-8d25f7d46678?q=80&w=2672"
+image: "https://res.cloudinary.com/dthdoxldn/image/upload/v1751394993/bestseller-card-20250701183427_zrn8lv.png"
 stripe_link: "#"
 tags: ["mindset", "personal development", "course", "transformation"]
 features:
