@@ -1,32 +1,36 @@
 ---
 layout: default
 ---
+    <!-- Back to Home Button -->
+    <a href="#" class="back-to-home" onclick="alert('Переход на главную страницу'); return false;">
+        Главная
+    </a>
 
-<article class="post-article">
-  <!-- Hero Section -->
-  <header class="post-hero">
-    <div class="post-hero-image image-loading">
-      <img class="lazy-img" loading="lazy" src="{{ page.image | relative_url }}" alt="{{ page.title }}">
-    </div>
-    <div class="post-header-content">
-      <div class="post-meta">
-        <time datetime="{{ page.date | date_to_xmlschema }}" class="post-date">
-          {{ page.date | date: "%b %d, %Y" }}
-        </time>
-        <span class="post-read-time">
-          <i class="far fa-clock"></i> {{ page.read_time }}
-        </span>
-      </div>
-      <h1 class="post-title">{{ page.title }}</h1>
-      {% if page.categories %}
-        <div class="post-categories">
-          {% for category in page.categories %}
-            <span class="post-category">{{ category }}</span>
-          {% endfor %}
-        </div>
-      {% endif %}
-    </div>
-  </header>
+    <!-- Scroll to Top Button -->
+    <button class="scroll-to-top" onclick="scrollToTop()">
+    </button>
+
+    <article class="post-article">
+        <!-- Hero Section -->
+        <header class="post-hero">
+            <div class="post-hero-image" id="heroImage">
+                <img src="https://images.unsplash.com/photo-1547394765-185e1e68f34e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Essential Skills for 2024">
+                
+                <!-- Category Badge -->
+                <div class="post-categories-overlay">
+                    <span class="post-category-badge">SKILLSET</span>
+                </div>
+                
+                <!-- Hidden Content -->
+                <div class="post-header-content">
+                    <div class="post-meta">
+                        <time class="post-date">Dec 15, 2024</time>
+                        <span class="post-read-time">5 min read</span>
+                    </div>
+                    <h1 class="post-title">Essential Skills for 2024</h1>
+                </div>
+            </div>
+        </header>
 
   <!-- Main Content -->
   <div class="post-content glass-card">
