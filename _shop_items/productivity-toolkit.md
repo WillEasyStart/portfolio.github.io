@@ -6,7 +6,7 @@ description: "Premium tools and resources to boost your productivity by 200%."
 category: "Toolset"
 price: "$79"
 original_price: "$149"
-image: "https://res.cloudinary.com/dthdoxldn/image/upload/v1751394993/bestseller-card-20250701183427_zrn8lv.png"
+image: "https://res.cloudinary.com/dthdoxldn/image/upload/v1751651108/bestseller-card-1751651022792_jpuz7r.png"
 stripe_link: "#"
 ---
 
