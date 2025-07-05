@@ -1,0 +1,212 @@
+<!-- _includes/sticky-header.html -->
+{% comment %}
+Sticky Header Include for Jekyll Blog
+Usage: {% include sticky-header.html %}
+Optional parameters:
+- show_share: true/false (default: true)
+- show_bookmark: true/false (default: true)
+- home_url: custom home URL (default: site.baseurl)
+- custom_title: override page title
+{% endcomment %}
+
+{% assign show_share = include.show_share | default: true %}
+{% assign show_bookmark = include.show_bookmark | default: true %}
+{% assign home_url = include.home_url | default: site.baseurl %}
+{% assign header_title = include.custom_title | default: page.title %}
+
+<header class="sticky-header" id="stickyHeader">
+    <div class="sticky-header-content">
+        <!-- Back to Home Button -->
+        <a href="{{ home_url | append: '/' | relative_url }}" class="back-to-home-btn">
+            <i class="fas fa-arrow-left"></i>
+            <span>Home</span>
+        </a>
+        
+        <!-- Page Title -->
+        <div class="page-title" id="pageTitle">
+            {{ header_title }}
+        </div>
+        
+        <!-- Action Buttons -->
+        <div class="header-actions">
+            {% if show_share %}
+            <button class="header-btn" onclick="sharePost()" title="Share this {{ page.layout | default: 'page' }}">
+                <i class="fas fa-share"></i>
+            </button>
+            {% endif %}
+            
+            {% if show_bookmark %}
+            <button class="header-btn" onclick="bookmarkPost()" title="Bookmark">
+                <i class="fas fa-bookmark"></i>
+            </button>
+            {% endif %}
+            
+            <!-- Optional: Add more action buttons -->
+            {% if page.layout == 'post' %}
+            <button class="header-btn" onclick="scrollToComments()" title="Comments">
+                <i class="fas fa-comment"></i>
+            </button>
+            {% endif %}
+        </div>
+    </div>
+</header>
+
+<!-- Sticky Header JavaScript -->
+<script>
+(function() {
+    'use strict';
+    
+    // Sticky Header Logic
+    const stickyHeader = document.getElementById('stickyHeader');
+    const pageTitle = document.getElementById('pageTitle');
+    let isHeaderVisible = false;
+
+    function updateStickyHeader() {
+        const currentScrollY = window.scrollY;
+        
+        // Show header when scrolling down past 200px
+        if (currentScrollY > 200 && !isHeaderVisible) {
+            stickyHeader.classList.add('visible');
+            isHeaderVisible = true;
+        }
+        // Hide header when scrolling up or at top
+        else if (currentScrollY <= 100 && isHeaderVisible) {
+            stickyHeader.classList.remove('visible');
+            isHeaderVisible = false;
+        }
+    }
+
+    // Throttled scroll event for better performance
+    let ticking = false;
+    function onScroll() {
+        if (!ticking) {
+            requestAnimationFrame(() => {
+                updateStickyHeader();
+                ticking = false;
+            });
+            ticking = true;
+        }
+    }
+
+    // Initialize scroll listener
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    // Share functionality
+    window.sharePost = function() {
+        const title = document.title;
+        const url = window.location.href;
+        
+        if (navigator.share) {
+            navigator.share({
+                title: title,
+                url: url,
+                text: 'Check out this {{ page.layout | default: "page" }}: ' + title
+            }).catch(err => console.log('Error sharing:', err));
+        } else {
+            // Fallback to copy URL
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(url).then(() => {
+                    showNotification('URL copied to clipboard!');
+                }).catch(err => {
+                    console.log('Error copying to clipboard:', err);
+                    fallbackCopyTextToClipboard(url);
+                });
+            } else {
+                fallbackCopyTextToClipboard(url);
+            }
+        }
+    };
+
+    // Bookmark functionality
+    window.bookmarkPost = function() {
+        // Try to use the Bookmarks API if available
+        if (window.external && window.external.AddFavorite) {
+            window.external.AddFavorite(window.location.href, document.title);
+        } else if (window.sidebar && window.sidebar.addPanel) {
+            window.sidebar.addPanel(document.title, window.location.href, "");
+        } else {
+            // Fallback notification
+            showNotification('Press Ctrl+D (Cmd+D on Mac) to bookmark this page!');
+        }
+    };
+
+    // Scroll to comments (for blog posts)
+    window.scrollToComments = function() {
+        const commentsSection = document.getElementById('comments') || 
+                              document.querySelector('.comments') || 
+                              document.querySelector('#disqus_thread');
+        
+        if (commentsSection) {
+            commentsSection.scrollIntoView({ behavior: 'smooth' });
+        } else {
+            showNotification('Comments section not found');
+        }
+    };
+
+    // Utility functions
+    function fallbackCopyTextToClipboard(text) {
+        const textArea = document.createElement("textarea");
+        textArea.value = text;
+        textArea.style.position = "fixed";
+        textArea.style.left = "-999999px";
+        textArea.style.top = "-999999px";
+        document.body.appendChild(textArea);
+        textArea.focus();
+        textArea.select();
+        
+        try {
+            const successful = document.execCommand('copy');
+            if (successful) {
+                showNotification('URL copied to clipboard!');
+            } else {
+                showNotification('Unable to copy URL');
+            }
+        } catch (err) {
+            console.log('Fallback: Oops, unable to copy', err);
+            showNotification('Unable to copy URL');
+        }
+        
+        document.body.removeChild(textArea);
+    }
+
+    function showNotification(message) {
+        // Create a simple notification
+        const notification = document.createElement('div');
+        notification.className = 'sticky-header-notification';
+        notification.textContent = message;
+        notification.style.cssText = `
+            position: fixed;
+            top: 70px;
+            right: 20px;
+            background: var(--card-bg);
+            backdrop-filter: blur(16px) saturate(180%);
+            border: var(--border) solid var(--border-color);
+            border-radius: 8px;
+            padding: 12px 16px;
+            z-index: 1001;
+            font-size: 14px;
+            color: var(--text-color);
+            box-shadow: var(--shadow);
+            transform: translateX(100%);
+            transition: transform 0.3s var(--ease);
+        `;
+        
+        document.body.appendChild(notification);
+        
+        // Animate in
+        setTimeout(() => {
+            notification.style.transform = 'translateX(0)';
+        }, 10);
+        
+        // Remove after 3 seconds
+        setTimeout(() => {
+            notification.style.transform = 'translateX(100%)';
+            setTimeout(() => {
+                if (notification.parentNode) {
+                    notification.parentNode.removeChild(notification);
+                }
+            }, 300);
+        }, 3000);
+    }
+})();
+</script>
