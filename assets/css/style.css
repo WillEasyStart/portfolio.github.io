@@ -2535,3 +2535,638 @@ body {
     border-left-width: 6px;
   }
 }
+
+/* ============ RESPONSIVE BREAKPOINTS ============ */
+/* Tablet: 768px - 1023px */
+/* Desktop: 1024px+ */
+/* Large Desktop: 1440px+ */
+
+/* ============ TABLET STYLES (768px - 1023px) ============ */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .post-article {
+    max-width: 100%;
+    padding: 2.5rem 2rem;
+  }
+
+  .post-hero {
+    margin-bottom: 3rem;
+  }
+
+  .post-hero-image {
+    height: 350px;
+  }
+
+  .post-header-content {
+    padding: 2rem;
+  }
+
+  .post-meta {
+    flex-direction: row;
+    gap: 2rem;
+  }
+
+  .post-title {
+    font-size: clamp(2rem, 4vw, 2.5rem);
+  }
+
+  .post-content {
+    padding: 2.5rem;
+    
+    .prose {
+      font-size: 1.05rem;
+      line-height: 1.75;
+      
+      h1 {
+        font-size: 2.25rem;
+      }
+      
+      h2 {
+        font-size: 1.875rem;
+      }
+      
+      h3 {
+        font-size: 1.5rem;
+      }
+      
+      p {
+        margin-bottom: 1.75rem;
+      }
+      
+      blockquote {
+        margin: 2.5rem 0;
+        padding: 2rem;
+        font-size: 1.15rem;
+      }
+      
+      pre {
+        padding: 2rem;
+        font-size: 0.9rem;
+      }
+      
+      table {
+        th, td {
+          padding: 1rem 0.75rem;
+        }
+      }
+    }
+  }
+
+  /* Product Page Tablet Styles */
+  .product-article {
+    padding: 2rem;
+    gap: 2.5rem;
+  }
+
+  .product-hero {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .product-hero-image {
+    height: 350px;
+  }
+
+  .product-header-content {
+    padding: 2rem;
+  }
+
+  .product-title {
+    font-size: clamp(2rem, 4vw, 2.5rem);
+  }
+
+  .product-description {
+    font-size: 1.15rem;
+  }
+
+  .product-features ul {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .modules-container {
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .module-card {
+    padding: 1.75rem;
+  }
+
+  .product-actions {
+    flex-direction: row;
+    gap: 1.5rem;
+  }
+
+  .btn-primary,
+  .btn-secondary {
+    padding: 1.25rem 2.5rem;
+    font-size: 1.05rem;
+  }
+}
+
+/* ============ DESKTOP STYLES (1024px+) ============ */
+@media (min-width: 1024px) {
+  .post-article {
+    max-width: 1200px;
+    padding: 3rem 2rem;
+  }
+
+  .post-hero {
+    margin-bottom: 4rem;
+  }
+
+  .post-hero-image {
+    height: 500px;
+  }
+
+  .post-header-content {
+    padding: 3rem;
+  }
+
+  .post-meta {
+    gap: 2.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .post-title {
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    margin-bottom: 1.5rem;
+  }
+
+  .post-content {
+    padding: 4rem;
+    
+    .prose {
+      max-width: 800px;
+      margin: 0 auto;
+      font-size: 1.125rem;
+      line-height: 1.8;
+      
+      h1 {
+        font-size: 2.75rem;
+        margin-top: 3rem;
+      }
+      
+      h2 {
+        font-size: 2.25rem;
+        margin-top: 2.5rem;
+      }
+      
+      h3 {
+        font-size: 1.875rem;
+        margin-top: 2rem;
+      }
+      
+      h4 {
+        font-size: 1.5rem;
+      }
+      
+      p {
+        margin-bottom: 2rem;
+      }
+      
+      blockquote {
+        margin: 3rem 0;
+        padding: 2.5rem;
+        font-size: 1.2rem;
+        
+        &::before {
+          font-size: 4rem;
+          top: -1rem;
+          left: 1.5rem;
+        }
+      }
+      
+      pre {
+        padding: 2.5rem;
+        font-size: 0.95rem;
+        margin: 2rem 0;
+      }
+      
+      img {
+        margin: 3rem 0;
+        max-width: 110%;
+        margin-left: -5%;
+        border-radius: 12px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s var(--ease);
+        
+        &:hover {
+          transform: scale(1.02);
+        }
+      }
+      
+      table {
+        margin: 2.5rem 0;
+        
+        th, td {
+          padding: 1.25rem 1rem;
+        }
+        
+        th {
+          font-size: 0.95rem;
+        }
+      }
+      
+      ul, ol {
+        margin-bottom: 2rem;
+        
+        li {
+          margin-bottom: 0.75rem;
+        }
+      }
+    }
+  }
+
+  /* Desktop Product Page Styles */
+  .product-article {
+    max-width: 1200px;
+    padding: 3rem 2rem;
+    gap: 3rem;
+  }
+
+  .product-hero {
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  .product-hero-image {
+    height: 600px;
+    order: 1;
+  }
+
+  .product-header-content {
+    padding: 0;
+    order: 2;
+  }
+
+  .product-title {
+    font-size: clamp(2.5rem, 4vw, 3.25rem);
+  }
+
+  .product-description {
+    font-size: 1.25rem;
+    line-height: 1.7;
+  }
+
+  .product-features {
+    margin: 2rem 0;
+    
+    h3 {
+      font-size: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+    
+    ul {
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+    }
+  }
+
+  .feature-item {
+    padding: 0.75rem 0;
+    
+    span:last-child {
+      font-size: 1.05rem;
+    }
+  }
+
+  .product-actions {
+    gap: 2rem;
+    margin: 2.5rem 0;
+  }
+
+  .btn-primary,
+  .btn-secondary {
+    padding: 1.5rem 3rem;
+    font-size: 1.1rem;
+    border-radius: 8px;
+  }
+
+  .product-guarantee {
+    padding: 1rem;
+    font-size: 1rem;
+  }
+
+  .product-content {
+    padding: 3rem;
+    
+    .prose {
+      max-width: 100%;
+      font-size: 1.125rem;
+      line-height: 1.8;
+      
+      h2, h3 {
+        margin-top: 2.5rem;
+      }
+      
+      h2 {
+        font-size: 2rem;
+      }
+      
+      h3 {
+        font-size: 1.5rem;
+      }
+    }
+  }
+
+  .modules-container {
+    grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+    gap: 2rem;
+  }
+
+  .module-card {
+    padding: 2.5rem;
+    
+    h3 {
+      font-size: 1.375rem;
+      margin-bottom: 1rem;
+    }
+    
+    p {
+      font-size: 1.05rem;
+      line-height: 1.6;
+    }
+  }
+
+  .module-number {
+    width: 3rem;
+    height: 3rem;
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .product-cta {
+    padding: 4rem 3rem;
+    
+    h2 {
+      font-size: 2.25rem;
+      margin-bottom: 1rem;
+    }
+    
+    p {
+      font-size: 1.125rem;
+      max-width: 600px;
+    }
+    
+    .btn-primary {
+      max-width: 350px;
+      padding: 1.5rem 3rem;
+    }
+  }
+}
+
+/* ============ LARGE DESKTOP STYLES (1440px+) ============ */
+@media (min-width: 1440px) {
+  .post-article {
+    max-width: 1400px;
+    padding: 4rem 3rem;
+  }
+
+  .post-hero-image {
+    height: 550px;
+  }
+
+  .post-header-content {
+    padding: 4rem;
+  }
+
+  .post-content {
+    padding: 5rem;
+    
+    .prose {
+      max-width: 900px;
+      font-size: 1.2rem;
+      
+      h1 {
+        font-size: 3.25rem;
+      }
+      
+      h2 {
+        font-size: 2.5rem;
+      }
+      
+      h3 {
+        font-size: 2rem;
+      }
+      
+      blockquote {
+        padding: 3rem;
+        font-size: 1.3rem;
+        
+        &::before {
+          font-size: 5rem;
+          top: -1.5rem;
+          left: 2rem;
+        }
+      }
+      
+      pre {
+        padding: 3rem;
+        font-size: 1rem;
+      }
+      
+      img {
+        max-width: 120%;
+        margin-left: -10%;
+        margin: 4rem 0;
+        margin-left: -10%;
+      }
+    }
+  }
+
+  /* Large Desktop Product Styles */
+  .product-article {
+    max-width: 1400px;
+    padding: 4rem 3rem;
+  }
+
+  .product-hero {
+    gap: 5rem;
+  }
+
+  .product-hero-image {
+    height: 650px;
+  }
+
+  .product-title {
+    font-size: 3.5rem;
+  }
+
+  .product-description {
+    font-size: 1.3rem;
+    line-height: 1.8;
+  }
+
+  .product-features ul {
+    gap: 1.5rem;
+  }
+
+  .modules-container {
+    grid-template-columns: repeat(auto-fill, minmax(420px, 1fr));
+    gap: 2.5rem;
+  }
+
+  .module-card {
+    padding: 3rem;
+  }
+
+  .product-content {
+    padding: 4rem;
+    
+    .prose {
+      font-size: 1.2rem;
+    }
+  }
+}
+
+/* ============ ENHANCED INTERACTIONS FOR LARGER SCREENS ============ */
+@media (min-width: 1024px) {
+  /* Smooth hover effects */
+  .post-hero-image img {
+    &:hover {
+      transform: scale(1.03);
+    }
+  }
+
+  .product-hero-image {
+    &[data-zoomable] {
+      cursor: zoom-in;
+      
+      &:hover img {
+        transform: scale(1.08);
+      }
+    }
+  }
+
+  /* Enhanced button interactions */
+  .btn-primary {
+    position: relative;
+    overflow: hidden;
+    
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: left 0.5s;
+    }
+    
+    &:hover::before {
+      left: 100%;
+    }
+  }
+
+  /* Table hover effects */
+  .prose table {
+    tr {
+      transition: all 0.2s ease;
+      
+      &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      }
+    }
+  }
+
+  /* Module card enhanced hover */
+  .module-card {
+    transition: all 0.3s var(--ease);
+    
+    &:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+    }
+  }
+
+  /* Category hover effects */
+  .post-category,
+  .product-category {
+    transition: all 0.3s var(--ease);
+    
+    &:hover {
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    }
+  }
+}
+
+/* ============ PRINT STYLES ============ */
+@media print {
+  .post-article,
+  .product-article {
+    max-width: 100%;
+    padding: 0;
+    box-shadow: none;
+    border: none;
+  }
+
+  .post-hero,
+  .product-hero {
+    page-break-inside: avoid;
+  }
+
+  .post-hero-image,
+  .product-hero-image {
+    height: auto;
+    max-height: 300px;
+  }
+
+  .post-header-content,
+  .product-header-content {
+    position: static;
+    background: none;
+    color: black;
+    padding: 1rem 0;
+  }
+
+  .post-content,
+  .product-content {
+    padding: 1rem 0;
+  }
+
+  .btn-primary,
+  .btn-secondary {
+    display: none;
+  }
+
+  .product-actions {
+    display: none;
+  }
+}
+
+/* ============ ACCESSIBILITY ENHANCEMENTS ============ */
+@media (prefers-reduced-motion: reduce) {
+  .post-hero-image img,
+  .product-hero-image img,
+  .module-card,
+  .btn-primary,
+  .btn-secondary {
+    transition: none;
+  }
+
+  .btn-primary::before {
+    display: none;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .post-category,
+  .product-category {
+    border: 2px solid currentColor;
+  }
+
+  .btn-primary,
+  .btn-secondary {
+    border: 2px solid currentColor;
+  }
+
+  .prose blockquote {
+    border-left-width: 6px;
+  }
+}
