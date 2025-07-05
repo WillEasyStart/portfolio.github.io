@@ -1,4 +1,5 @@
 ---
+layout: shop-item
 id: "product3"
 title: "Productivity Toolkit"
 description: "Premium tools and resources to boost your productivity by 200%."
