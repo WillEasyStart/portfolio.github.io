@@ -354,3 +354,80 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Expose filterCards to global scope
 window.filterCards = filterCards;
+
+// Post Image Interaction
+        document.addEventListener('DOMContentLoaded', function() {
+            const postHeroImage = document.getElementById('heroImage');
+            const scrollToTopBtn = document.querySelector('.scroll-to-top');
+            
+            // Hero image click functionality
+            if (postHeroImage) {
+                postHeroImage.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    this.classList.toggle('show-content');
+                    createRippleEffect(e, this);
+                });
+                
+                postHeroImage.addEventListener('keydown', function(e) {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        this.classList.toggle('show-content');
+                    }
+                });
+                
+                postHeroImage.setAttribute('tabindex', '0');
+                postHeroImage.setAttribute('role', 'button');
+                postHeroImage.setAttribute('aria-label', 'Нажмите для просмотра информации о посте');
+            }
+            
+            // Scroll to top button visibility
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 300) {
+                    scrollToTopBtn.classList.add('visible');
+                } else {
+                    scrollToTopBtn.classList.remove('visible');
+                }
+            });
+            
+            // Close content when clicking outside
+            document.addEventListener('click', function(e) {
+                if (postHeroImage && !postHeroImage.contains(e.target)) {
+                    postHeroImage.classList.remove('show-content');
+                }
+            });
+            
+            // Close content on Escape key
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    postHeroImage.classList.remove('show-content');
+                }
+            });
+        });
+        
+        // Ripple effect function
+        function createRippleEffect(event, element) {
+            const rect = element.getBoundingClientRect();
+            const x = event.clientX - rect.left;
+            const y = event.clientY - rect.top;
+            
+            const ripple = document.createElement('div');
+            ripple.className = 'ripple-effect';
+            ripple.style.left = x + 'px';
+            ripple.style.top = y + 'px';
+            
+            element.appendChild(ripple);
+            
+            setTimeout(() => {
+                if (ripple.parentNode) {
+                    ripple.parentNode.removeChild(ripple);
+                }
+            }, 600);
+        }
+        
+        // Scroll to top function
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
