@@ -5,7 +5,7 @@ date: 2023-05-12
 categories: [Mindset]
 tags: [mindset, personal-growth, success]
 author: "Will Napolini"
-image: "https://res.cloudinary.com/dqpwi2gat/image/upload/v1747480405/8-rules-love-jay-shetty-willonsuccess-book-cover_ocrs4w.png"
+image: "https://res.cloudinary.com/dthdoxldn/image/upload/v1751297191/will-napolini-willonsuccess-12-most-valuable-digital-products-to-build-in-2024_alrtva.webp"
 read_time: "5 min read"
 description: "How changing your mindset can transform your life and career in ways you never imagined possible."
 ---
