@@ -2562,3 +2562,234 @@ body {
     border-left-width: 6px;
   }
 }
+
+/* ============ DESKTOP RESPONSIVE FIXES ============ */
+
+/* App Content - Desktop Layout */
+@media (min-width: 768px) {
+  .app-content {
+    max-width: 900px;
+    padding-top: 20px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .app-content {
+    max-width: 1200px;
+  }
+}
+
+/* Portfolio Section - Desktop */
+@media (min-width: 768px) {
+  .portfolio-section {
+    height: 60vh;
+    min-height: 500px;
+    max-height: 700px;
+  }
+}
+
+/* Shop Container - Desktop Grid Layout */
+@media (min-width: 768px) {
+  .shop-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    padding: 1rem;
+    overflow-y: auto;
+    overflow-x: hidden;
+    height: 100%;
+  }
+  
+  .shop-card {
+    width: 100%;
+    height: auto;
+    margin-right: 0;
+    aspect-ratio: 3/4;
+    min-height: 400px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .shop-container {
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+    padding: 1.5rem;
+  }
+  
+  .shop-card {
+    min-height: 450px;
+  }
+}
+
+/* Blog Container - Desktop Grid Layout */
+@media (min-width: 768px) {
+  .blog-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 1.5rem;
+    padding: 1rem;
+    height: calc(100% - 50px);
+    overflow-y: auto;
+    align-items: start;
+  }
+  
+  .blog-card {
+    margin: 0;
+    height: fit-content;
+  }
+}
+
+@media (min-width: 1024px) {
+  .blog-container {
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 2rem;
+    padding: 1.5rem;
+  }
+}
+
+/* Shop Card Desktop Styles */
+@media (min-width: 768px) {
+  .shop-card {
+    padding: 1rem;
+  }
+  
+  .shop-overlay {
+    padding: 1rem;
+  }
+  
+  .shop-title {
+    font-size: 18px;
+    margin-bottom: 0.5rem;
+  }
+  
+  .shop-price-current {
+    font-size: 1rem;
+  }
+  
+  .shop-price-original {
+    font-size: 0.875rem;
+  }
+  
+  .shop-description {
+    font-size: 14px;
+    line-height: 1.4;
+    margin-bottom: 0.75rem;
+  }
+  
+  .shop-actions {
+    gap: 0.75rem;
+    margin-top: 0.75rem;
+  }
+  
+  .shop-buy-btn {
+    padding: 0.75rem 1rem;
+    font-size: 0.875rem;
+    gap: 0.5rem;
+  }
+  
+  .shop-info-btn {
+    width: 2.5rem;
+    height: 2.5rem;
+  }
+}
+
+/* Blog Card Desktop Styles */
+@media (min-width: 768px) {
+  .blog-card {
+    padding: 1.5rem;
+    gap: 1rem;
+  }
+  
+  .blog-image {
+    height: 200px;
+  }
+  
+  .blog-title {
+    font-size: 20px;
+    line-height: 1.3;
+  }
+  
+  .blog-excerpt {
+    font-size: 15px;
+    line-height: 1.5;
+    -webkit-line-clamp: 4;
+  }
+  
+  .blog-meta {
+    margin-top: 1rem;
+  }
+  
+  .author-avatar {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .author-name {
+    font-size: 15px;
+  }
+  
+  .post-date,
+  .read-time {
+    font-size: 13px;
+  }
+}
+
+/* Category Filters Desktop */
+@media (min-width: 768px) {
+  .category-filter-container {
+    margin-bottom: 1rem;
+  }
+  
+  .category-filters {
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+  
+  .category-filter {
+    padding: 0.75rem 1.5rem;
+    font-size: 0.875rem;
+  }
+}
+
+/* Controls Desktop Positioning */
+@media (min-width: 768px) {
+  .controls-container {
+    top: 1.5rem;
+    left: 1.5rem;
+    right: 1.5rem;
+  }
+  
+  .portfolio-toggle-container {
+    top: 1.5rem;
+    right: 1.5rem;
+  }
+}
+
+/* Profile Section Desktop */
+@media (min-width: 768px) {
+  .profile-img {
+    width: 120px;
+    height: 120px;
+  }
+  
+  h1 {
+    font-size: 2.5rem;
+  }
+  
+  .social-icon {
+    width: 50px;
+    height: 50px;
+  }
+}
+
+/* Glass Card Desktop Enhancements */
+@media (min-width: 768px) {
+  .glass-card {
+    padding: 2rem;
+  }
+  
+  .glass-card:hover {
+    transform: translateY(-12px) scale(1.03);
+  }
+}
