@@ -21,32 +21,6 @@ Optional parameters:
             <i class="fas fa-arrow-left"></i>
             <span>Home</span>
         </a>
-        
-        <!-- Page Title -->
-        <div class="page-title" id="pageTitle">
-            {{ header_title }}
-        </div>
-        
-        <!-- Action Buttons -->
-        <div class="header-actions">
-            {% if show_share %}
-            <button class="header-btn" onclick="sharePost()" title="Share this {{ page.layout | default: 'page' }}">
-                <i class="fas fa-share"></i>
-            </button>
-            {% endif %}
-            
-            {% if show_bookmark %}
-            <button class="header-btn" onclick="bookmarkPost()" title="Bookmark">
-                <i class="fas fa-bookmark"></i>
-            </button>
-            {% endif %}
-            
-            <!-- Optional: Add more action buttons -->
-            {% if page.layout == 'post' %}
-            <button class="header-btn" onclick="scrollToComments()" title="Comments">
-                <i class="fas fa-comment"></i>
-            </button>
-            {% endif %}
         </div>
     </div>
 </header>
