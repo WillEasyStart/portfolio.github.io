@@ -1,44 +1,57 @@
 ---
 layout: default
 ---
-    <!-- Back to Home Button -->
-    <a href="#" class="back-to-home" onclick="alert('Back To Home'); return false;">
-        Home
-    </a>
 
-    <!-- Scroll to Top Button -->
-    <button class="scroll-to-top" onclick="scrollToTop()">
-    </button>
+{% comment %}
+Include the sticky header with default settings
+You can customize by passing parameters:
+- show_share: false (to hide share button)
+- show_bookmark: false (to hide bookmark button)
+- home_url: "/custom-home" (for custom home URL)
+- custom_title: "Custom Title" (to override page title)
+{% endcomment %}
+
+{% include sticky-header.html %}
+
+<!-- Scroll to Top Button -->
+<button class="scroll-to-top" onclick="scrollToTop()" id="scrollToTopBtn">
+    <i class="fas fa-chevron-up"></i>
+</button>
 
 <article class="post-article">
-  <!-- Hero Section -->
-  <header class="post-hero">
-    <div class="post-hero-image image-loading" id="heroImage">
-      <img class="lazy-img" loading="lazy" src="{{ page.image | relative_url }}" alt="{{ page.title }}">
-      
-      <!-- Category Badge Overlay -->
-      {% if page.categories %}
-      <div class="post-categories-overlay">
-        {% for category in page.categories %}
-        <span class="post-category-badge">{{ category }}</span>
-        {% endfor %}
-      </div>
-      {% endif %}
-      
-      <!-- Hidden Content -->
-      <div class="post-header-content">
-        <div class="post-meta">
-          <time datetime="{{ page.date | date_to_xmlschema }}" class="post-date">
-            {{ page.date | date: "%b %d, %Y" }}
-          </time>
-          <span class="post-read-time">
-            <i class="far fa-clock"></i> {{ page.read_time }}
-          </span>
+    <!-- Hero Section -->
+    <header class="post-hero">
+        <div class="post-hero-image image-loading" id="heroImage">
+            <img class="lazy-img" loading="lazy" src="{{ page.image | relative_url }}" alt="{{ page.title }}">
+            
+            <!-- Category Badge Overlay -->
+            {% if page.categories %}
+            <div class="post-categories-overlay">
+                {% for category in page.categories %}
+                <span class="post-category-badge">{{ category }}</span>
+                {% endfor %}
+            </div>
+            {% endif %}
+            
+            <!-- Header Content -->
+            <div class="post-header-content">
+                <div class="post-meta">
+                    <time datetime="{{ page.date | date_to_xmlschema }}" class="post-date">
+                        {{ page.date | date: "%b %d, %Y" }}
+                    </time>
+                    {% if page.read_time %}
+                    <span class="post-read-time">
+                        <i class="far fa-clock"></i> {{ page.read_time }}
+                    </span>
+                    {% endif %}
+                </div>
+                <h1 class="post-title">{{ page.title }}</h1>
+                {% if page.description %}
+                <p class="post-description">{{ page.description }}</p>
+                {% endif %}
+            </div>
         </div>
-        <h1 class="post-title">{{ page.title }}</h1>
-      </div>
-    </div>
-  </header>
+    </header>
 
   <!-- Main Content -->
   <div class="post-content glass-card">
