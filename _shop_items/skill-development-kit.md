@@ -1,4 +1,5 @@
 ---
+layout: shop-item
 id: "product2"
 title: "Skill Development Kit"
 description: "Everything you need to accelerate your learning and master new skills."
